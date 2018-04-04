@@ -2,7 +2,7 @@
 
 namespace BS.ViewModels
 {
-    internal class TestViewModels : ViewModelBase
+    internal class UserViewModel : ViewModelBase
     {
     }
 }
