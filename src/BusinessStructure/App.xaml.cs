@@ -20,9 +20,10 @@ namespace BS
         /// </summary>
         public App()
         {
+            AppCenter.Start("90a28799-1743-459b-807e-42b5a19000ee", typeof(Analytics));
             InitializeComponent();
             Suspending += OnSuspending;
-            AppCenter.Start("90a28799-1743-459b-807e-42b5a19000ee", typeof(Analytics));
+            
         }
 
         /// <summary>
