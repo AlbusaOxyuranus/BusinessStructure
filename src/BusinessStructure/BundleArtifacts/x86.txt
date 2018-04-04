@@ -1,0 +1,2 @@
+MainPackage=C:\Git\GitHub\BusinessStructure\src\BusinessStructure\bin\x86\Release\BusinessStructure_1.0.0.0_x86.appx
+SymbolPackage=C:\Git\GitHub\BusinessStructure\src\BusinessStructure\AppPackages\BusinessStructure_1.0.0.0_Test\BusinessStructure_1.0.0.0_x86.appxsym
