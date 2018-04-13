@@ -6,6 +6,6 @@
         mc:Ignorable="d"
         Title="Бизнес структура" Height="450" Width="800">
     <Grid>
-        
+        <Frame Source="/BS.WPF;component/Views/Pages/LoginView.xaml"></Frame>
     </Grid>
 </Window>

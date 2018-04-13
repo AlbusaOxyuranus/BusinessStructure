@@ -11,6 +11,10 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BS.Slib", "..\BS.Vms\BS.Sli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BS.WPF", "..\BS.WPF\BS.WPF.csproj", "{F6723960-734E-4EB2-AC36-AA9CE627660C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{2974DEAB-56D3-4AEA-92A2-C73A613C4896}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BS.Services", "..\BS.Services\BS.Services.csproj", "{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\BS.Vms\BS.Vms.projitems*{8874a268-3389-465a-9751-3fd27f50d7ec}*SharedItemsImports = 4
@@ -79,9 +83,28 @@ Global
 		{F6723960-734E-4EB2-AC36-AA9CE627660C}.Release|x64.Build.0 = Release|Any CPU
 		{F6723960-734E-4EB2-AC36-AA9CE627660C}.Release|x86.ActiveCfg = Release|Any CPU
 		{F6723960-734E-4EB2-AC36-AA9CE627660C}.Release|x86.Build.0 = Release|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Debug|ARM.Build.0 = Debug|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Debug|x64.Build.0 = Debug|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Debug|x86.Build.0 = Debug|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Release|ARM.ActiveCfg = Release|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Release|ARM.Build.0 = Release|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Release|x64.ActiveCfg = Release|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Release|x64.Build.0 = Release|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Release|x86.ActiveCfg = Release|Any CPU
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{24EFFE1B-2A6C-4769-BF4B-135BB41ECBE2} = {2974DEAB-56D3-4AEA-92A2-C73A613C4896}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F156028C-49F0-488A-B86F-503F32EF9F1C}

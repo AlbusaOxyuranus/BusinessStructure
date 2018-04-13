@@ -9,7 +9,9 @@
     <Import_RootNamespace>BS.Vms</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AccountViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CustomerViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UserViewModel.cs" />
   </ItemGroup>
 </Project>
