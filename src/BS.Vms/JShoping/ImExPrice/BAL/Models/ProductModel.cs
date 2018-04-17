@@ -10,5 +10,7 @@
         public int? WeightVolumeUnits { get; set; }
         public int ProductPublish { get; set; }
         public string ImageUrl { get; set; }
+        public string ExtraField2 { get; set; }
+        public string ExtraField1 { get; set; }
     }
 }

@@ -21,5 +21,9 @@ namespace BS.Vms.JShoping.ImExPrice.DAL.Classes
 
         [DataMember(Name = "product_publish")] public int ProductPublish { get; set; }
         [DataMember(Name = "image")] public string Image { get; set; }
+
+        [DataMember(Name = "extra_field_1")] public string ExtraField1 { get; set; }
+
+        [DataMember(Name = "extra_field_2")] public string ExtraField2 { get; set; }
     }
 }

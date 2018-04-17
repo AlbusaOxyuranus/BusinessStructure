@@ -49,5 +49,8 @@ namespace BS.Vms.ViewModels.price
                 return 0.ToString("#.00");
             }
         }
+
+        public string ExtraField1 { get; set; }
+        public string ExtraField2 { get; set; }
     }
 }

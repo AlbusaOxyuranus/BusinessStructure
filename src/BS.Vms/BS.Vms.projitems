@@ -11,7 +11,9 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ImageConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JShoping\ImExPrice\BAL\ImExPriceBusinessContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JShoping\ImExPrice\BAL\Models\ExtraFieldsValuesModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JShoping\ImExPrice\BAL\Models\ProductModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JShoping\ImExPrice\DAL\Classes\ExtraFieldsValues.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JShoping\ImExPrice\DAL\Classes\Product.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JShoping\ImExPrice\DAL\ImExPriceDataContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ModeApp.cs" />

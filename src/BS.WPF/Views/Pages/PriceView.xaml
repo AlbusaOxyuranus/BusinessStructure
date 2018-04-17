@@ -17,32 +17,7 @@
 
     <controls:BusyIndicatorPage.Resources>
         <vms:ImageConverter x:Key="ImageConverter" />
-        <DataTemplate x:Key="TemplateLine">
-            <StackPanel>
-                <TextBlock Text="{Binding Name}" />
-                <Image Source="{Binding Path=ImageBit, Converter={StaticResource ImageConverter}}" />
-            </StackPanel>
-        </DataTemplate>
-        <DataTemplate x:Key="DataTemplate1">
-            <StackPanel>
-                <TextBlock Text="{Binding Name}" />
-                <Image Source="{Binding Path=ImageBit, Converter={StaticResource ImageConverter}}" />
-            </StackPanel>
-        </DataTemplate>
-        <DataTemplate x:Key="DataTemplate2">
-            <StackPanel>
-                <TextBlock Text="{Binding Name}" />
-                <Image Source="{Binding Path=ImageBit, Converter={StaticResource ImageConverter}}" />
-            </StackPanel>
-        </DataTemplate>
-
-        <DataGridTemplateColumn x:Key="dgt" Header="Column1" Width="SizeToCells">
-            <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                    <Image Source="{Binding Path=ImageBit, Converter={StaticResource ImageConverter}}" />
-                </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
+        
     </controls:BusyIndicatorPage.Resources>
     <controls:BusyIndicatorPage.DataContext>
         <viewModels:PriceViewModel />
@@ -93,7 +68,21 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Размеры">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ExtraField1}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
+                <DataGridTemplateColumn Header="Состав">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding ExtraField2}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Изображение">
 
                     <DataGridTemplateColumn.CellTemplate>
