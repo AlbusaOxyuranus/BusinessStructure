@@ -64,10 +64,12 @@ namespace BS.Vms.ViewModels
         {
             _list = new ObservableCollection<ProductViewModel>();
             CreatePriceExcelCommand = AsyncCommand.Create(CreatePriceExcel);
+            
         }
 
         private async Task CreatePriceExcel()
         {
+            Store.CreateOrGet<PriceViewModel>().PercentProcess = 0;
             Store.CreateOrGet<PriceViewModel>().BussinessProcess = true;
             await TaskHelper.RunAsync(() =>
             {
@@ -149,6 +151,8 @@ namespace BS.Vms.ViewModels
 
             using (var bc = new ImExPriceBusinessContext(ModeApp.Instance))
             {
+                Store.CreateOrGet<PriceViewModel>().BussinessProcessMessage =
+                    "Установка соединения с веб-сайтом:  http://monnaanna.by";
                 var res = await bc.GetProducts();
                 var resFieldValues = await bc.GetExtraFieldsValuesAsync();
                 await TaskHelper.RunAsync(() =>
@@ -173,7 +177,8 @@ namespace BS.Vms.ViewModels
                         }
                     }
 
-                    var items = res.FindAll(x => x.ProductPublish == 1 && x.ImageUrl.Contains("k"));
+                    var items = res.FindAll(x => x.ProductPublish == 1
+                                                 );
                     Bitmap bitmap = null;
                     using (var clientLogo = new WebClient())
                     {
@@ -186,7 +191,7 @@ namespace BS.Vms.ViewModels
                                 bitmap = new Bitmap(stream);
 
                                 Store.CreateOrGet<PriceViewModel>().BussinessProcessMessage =
-                                    "Cкачивание логотипа компании " +
+                                    "Загрузка логотипа компании с веб-сайта:  http://monnaanna.by" +
                                     "http://monnaanna.by/images/MonnaAnna/logo.png";
 
                                 //bitmap = new Bitmap(bitmap, bitmap.Width / 4, bitmap.Height / 4);
@@ -207,8 +212,8 @@ namespace BS.Vms.ViewModels
                         Store.CreateOrGet<PriceViewModel>().IsPercent = false;
                         Store.CreateOrGet<PriceViewModel>().PercentProcess =  100 * itemNumber/ items.Count;
                         Store.CreateOrGet<PriceViewModel>().BussinessProcessMessage =
-                            "Чтение файла с изображением " +
-                            r.ImageUrl + " ( " + itemNumber + " из " +
+                            "Скачивание и уменьшение размера файла изображения "+r.ImageUrl + " c веб-сайта:  http://monnaanna.by" +
+                             " ( " + itemNumber + " из " +
                             items.Count + " )";// + ". Процент выполнения " +
                             //Store.CreateOrGet<PriceViewModel>().PercentProcess;
                         
@@ -227,9 +232,9 @@ namespace BS.Vms.ViewModels
                                         {
                                             bitmap = new Bitmap(stream);
 
-                                            Store.CreateOrGet<PriceViewModel>().BussinessProcessMessage =
-                                                "Уменьшение изображения по пропорции " +
-                                                r.ImageUrl;
+                                            //Store.CreateOrGet<PriceViewModel>().BussinessProcessMessage =
+                                            //    "Уменьшение изображения по пропорции " +
+                                            //    r.ImageUrl;
 
                                             bitmap = new Bitmap(bitmap, bitmap.Width / 4, bitmap.Height / 4);
 
@@ -426,7 +431,7 @@ namespace BS.Vms.ViewModels
                     countImage++;
                     Store.CreateOrGet<PriceViewModel>().IsPercent = false;
                     Store.CreateOrGet<PriceViewModel>().PercentProcess =( 100 * countImage) / (dictionary.Count * dictionary[i].ValueList.Count);
-                    Store.CreateOrGet<PriceViewModel>().BussinessProcessMessage = "Обработка  " + countImage +"  из "+ dictionary.Count* dictionary[i].ValueList.Count;
+                    Store.CreateOrGet<PriceViewModel>().BussinessProcessMessage = "Обработка строк документа " + countImage +"  из "+ dictionary.Count* dictionary[i].ValueList.Count;
                     if (dictionary[i].TypeExp == TypeExp.STRING)
                     {
                         Microsoft.Office.Interop.Excel.Range oRange = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[j, i + 1];
