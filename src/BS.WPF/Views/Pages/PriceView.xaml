@@ -12,7 +12,7 @@
                             Title="PriceView">
     <controls:BusyIndicatorPage.BusyIndicator>
         <controls:BusyIndicatorControl LoadState="{Binding BussinessProcess, Mode=TwoWay}"
-                                       Message="{Binding BussinessProcessMessage}" />
+                                       Message="{Binding BussinessProcessMessage}" Value="{Binding PercentProcess, Mode=TwoWay}" />
     </controls:BusyIndicatorPage.BusyIndicator>
 
     <controls:BusyIndicatorPage.Resources>
@@ -57,22 +57,44 @@
         </ListView>-->
         <DataGrid Margin="20" ItemsSource="{Binding List}" IsReadOnly="True" AutoGenerateColumns="False" Grid.RowSpan="1">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Id">
+                <DataGridTemplateColumn Header="Номер №">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Id}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
-                <DataGridTemplateColumn Header="Name">
+                <DataGridTemplateColumn Header="Наименование">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Name">
+                <DataGridTemplateColumn Header="Цена за единицу товара BYN">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Price_Byn_unit}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Цена за упаковку BYN">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Price_Byn}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn Header="Кол-во в упаковке">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding WeightVolumeUnits}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Изображение">
 
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

@@ -27,7 +27,7 @@ namespace BS.Vms
                         var bi = new BitmapImage();
 
                         bi.BeginInit();
-                        bi.DecodePixelWidth = 50;
+                        bi.DecodePixelWidth = 100;
                         //bi.DecodePixelHeight = 50;
                         bi.CacheOption = BitmapCacheOption.OnLoad;
                         bi.UriSource = new Uri(info.FullName);

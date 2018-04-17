@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
@@ -25,17 +26,32 @@ namespace BS.Vms.ViewModels
         DOUBLE,
         IMAGE
     }
+
+    public enum HorizontalAlignmentText
+    {
+        NoAlign,
+        Center
+    }
+    public enum VerticalAlignmentText
+    {
+        NoAlign,
+        Center
+    }
+    //workSheet_range.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
     public class Exp
     {
         public string NameRow { get; set; }
         public TypeExp TypeExp { get; set; }
         public List<string> ValueList { get; set; }
         public int Width { get; set; }
-
+        public HorizontalAlignmentText HorizontalAlignmentText { get; set; }
+        public VerticalAlignmentText VerticalAlignmentText { get; set; }
+        
         public Exp()
         {
             TypeExp = TypeExp.STRING;
             ValueList = new List<string>();
+
         }
     }
 
@@ -59,16 +75,24 @@ namespace BS.Vms.ViewModels
                 List<Exp> expList = new List<Exp>();
 
                 List<Exp> list = new List<Exp>();
-                var ids = new Exp() { NameRow = "№", TypeExp = TypeExp.INT };
-                var names = new Exp() { NameRow = "Наименование товара" };
+                var ids = new Exp() { NameRow = "№", TypeExp = TypeExp.INT, VerticalAlignmentText = VerticalAlignmentText.Center };
+                var names = new Exp() { NameRow = "Наименование товара",VerticalAlignmentText = VerticalAlignmentText.Center};
                 var images = new Exp() { NameRow = "Изображение", TypeExp = TypeExp.IMAGE};
-                //var WeightVolumeUnits = new Exp() { NameRow = "Количество в упаковке", TypeExp = TypeExp.INT };
+                var WeightVolumeUnits = new Exp() { NameRow = "Количество в упаковке", TypeExp = TypeExp.INT, HorizontalAlignmentText = HorizontalAlignmentText.Center, VerticalAlignmentText = VerticalAlignmentText.Center };
+                var Price_Byn_units = new Exp() { NameRow = "Цена за единицу товара BYN", TypeExp = TypeExp.DOUBLE, HorizontalAlignmentText = HorizontalAlignmentText.Center, VerticalAlignmentText = VerticalAlignmentText.Center };
+                var Price_Byn = new Exp()
+                {
+                    NameRow = "Цена за упаковку BYN", TypeExp = TypeExp.DOUBLE , HorizontalAlignmentText = HorizontalAlignmentText.Center
+                    ,VerticalAlignmentText = VerticalAlignmentText.Center
+                };
                 //var priceUSD = new Exp() { NameRow = "Цена в USD", TypeExp = TypeExp.DOUBLE };
 
                 list.Add(ids);
                 list.Add(names);
                 list.Add(images);
-                //list.Add(WeightVolumeUnits);
+                list.Add(WeightVolumeUnits);
+                list.Add(Price_Byn_units);
+                list.Add(Price_Byn);
                 //list.Add(priceUSD);
                 foreach (var prod in this.List)
                 {
@@ -76,7 +100,10 @@ namespace BS.Vms.ViewModels
                     names.ValueList.Add(prod.Name);
                     images.ValueList.Add(prod.ImageBit);
                     //priceUSD.ValueList.Add(prod.PriceUsd);
-                    //WeightVolumeUnits.ValueList.Add(prod.WeightVolumeUnits.ToString());
+                   
+                    WeightVolumeUnits.ValueList.Add(prod.WeightVolumeUnits.ToString());
+                    Price_Byn_units.ValueList.Add(prod.Price_Byn_unit);
+                    Price_Byn.ValueList.Add(prod.Price_Byn);
                 }
                 if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "price.xls"))
                     File.Delete(AppDomain.CurrentDomain.BaseDirectory + "price.xls");
@@ -128,14 +155,17 @@ namespace BS.Vms.ViewModels
                         }
                     }
 
-                    var items = res.FindAll(x => x.ProductPublish == 1 && x.ImageUrl.Contains("k"));
+                    var items = res.FindAll(x => x.ProductPublish == 1);// && x.ImageUrl.Contains("k"));
                     foreach (var r in items) //.FindAll(x=>x.ImageUrl.Contains("")))
                     {
                         itemNumber++;
+                        Store.CreateOrGet<PriceViewModel>().IsPercent = false;
+                        Store.CreateOrGet<PriceViewModel>().PercentProcess =  100 * itemNumber/ items.Count;
                         Store.CreateOrGet<PriceViewModel>().BussinessProcessMessage =
                             "Чтение файла с изображением " +
                             r.ImageUrl + " ( " + itemNumber + " из " +
-                            items.Count + " )";
+                            items.Count + " )";// + ". Процент выполнения " +
+                            //Store.CreateOrGet<PriceViewModel>().PercentProcess;
                         Bitmap bitmap = null;
                         try
                         {
@@ -150,6 +180,12 @@ namespace BS.Vms.ViewModels
                                     {
                                         bitmap = new Bitmap(stream);
 
+                                        Store.CreateOrGet<PriceViewModel>().BussinessProcessMessage =
+                                            "Уменьшение изображения по пропорции " +
+                                            r.ImageUrl;
+
+                                        bitmap = new Bitmap(bitmap, bitmap.Width/4, bitmap.Height/4);
+
                                         if (bitmap != null)
                                             bitmap.Save("Cache\\" + r.ImageUrl, ImageFormat.Jpeg);
 
@@ -161,7 +197,9 @@ namespace BS.Vms.ViewModels
                                     {
                                         Id = r.Id,
                                         Name = r.Name,
-                                        ImageBit = System.AppDomain.CurrentDomain.BaseDirectory + "Cache\\" + r.ImageUrl
+                                        ImageBit = System.AppDomain.CurrentDomain.BaseDirectory + "Cache\\" + r.ImageUrl,
+                                        PriceUsd = r.ProductPrice.ToString(),
+                                        WeightVolumeUnits = r.WeightVolumeUnits
                                     });
                                 }
                             }
@@ -201,6 +239,37 @@ namespace BS.Vms.ViewModels
             return resultLIst;
         }
 
+        public Image ResizeOrigImg(Image image, int nWidth, int nHeight, out int newSizeImage, out bool isWidth)
+        {
+            int newWidth, newHeight;
+            if (image.Width > image.Height)
+            {
+                newWidth = nWidth;
+                newHeight = image.Height * nWidth / image.Width;
+                newSizeImage = newHeight;
+                isWidth = true;
+            }
+            else
+            {
+                newHeight = nHeight;
+                newWidth = image.Width * nWidth / image.Height;
+                newSizeImage = newWidth;
+                isWidth = false;
+            }
+
+            Image result = new Bitmap(newWidth, newHeight);
+            using (var g = Graphics.FromImage(result))
+            {
+                g.CompositingQuality = CompositingQuality.HighQuality;
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+                g.DrawImage(image, 0, 0, newWidth, newHeight);
+                g.Dispose();
+            }
+            return result;
+        }
+
         public static Bitmap BitmapImage2Bitmap(BitmapImage bitmapImage)
         {
             // BitmapImage bitmapImage = new BitmapImage(new Uri("../Images/test.png", UriKind.Relative));
@@ -237,28 +306,46 @@ namespace BS.Vms.ViewModels
             xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
             int emptyLine = 2;
-
+            int countImage = 0;
             for (int i = 0; i < dictionary.Count; i++)
             {
                 int j = 2;
-
                 xlWorkSheet.Cells[j - 1, i + 1] = dictionary[i].NameRow;
                 foreach (var value in dictionary[i].ValueList)
                 {
-                    Store.CreateOrGet<PriceViewModel>().BussinessProcessMessage = "Обработка  i=" + i+"  j="+ j;
+                    countImage++;
+                    Store.CreateOrGet<PriceViewModel>().IsPercent = false;
+                    Store.CreateOrGet<PriceViewModel>().PercentProcess =( 100 * countImage) / (dictionary.Count * dictionary[i].ValueList.Count);
+                    Store.CreateOrGet<PriceViewModel>().BussinessProcessMessage = "Обработка  " + countImage +"  из "+ dictionary.Count* dictionary[i].ValueList.Count;
                     if (dictionary[i].TypeExp == TypeExp.STRING)
                     {
                         Microsoft.Office.Interop.Excel.Range oRange = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[j, i + 1];
                         oRange.ColumnWidth = 30;
+
+                        if (dictionary[i].HorizontalAlignmentText==HorizontalAlignmentText.Center)
+                            oRange.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                        if (dictionary[i].VerticalAlignmentText == VerticalAlignmentText.Center)
+                            oRange.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                         xlWorkSheet.Cells[j, i + 1] = value;
                        
                     }
                     else if (dictionary[i].TypeExp == TypeExp.DOUBLE)
                     {
+                        Microsoft.Office.Interop.Excel.Range oRange = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[j, i + 1];
+                        if (dictionary[i].HorizontalAlignmentText == HorizontalAlignmentText.Center)
+                            oRange.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                        if (dictionary[i].VerticalAlignmentText == VerticalAlignmentText.Center)
+                            oRange.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                         xlWorkSheet.Cells[j, i + 1] = double.Parse(value);
                     }
                     else if (dictionary[i].TypeExp == TypeExp.INT)
                     {
+                        Microsoft.Office.Interop.Excel.Range oRange = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[j, i + 1];
+                        if (dictionary[i].HorizontalAlignmentText == HorizontalAlignmentText.Center)
+                            oRange.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                        if (dictionary[i].VerticalAlignmentText == VerticalAlignmentText.Center)
+                            oRange.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
                         xlWorkSheet.Cells[j, i + 1] = int.Parse(value);
                     }
                     else if (dictionary[i].TypeExp == TypeExp.IMAGE)
@@ -283,9 +370,9 @@ namespace BS.Vms.ViewModels
                         float Left = (float)((double)oRange.Left);
                         float Top = (float)((double)oRange.Top);
                         //const float ImageSize = 32;
-                        oRange.RowHeight = img.Height / 10;
+                        oRange.RowHeight = img.Height / 2;
                         oRange.ColumnWidth = 30;// (img.Width / 10 - 12 + 5) / 7d + 1;//From pixels to inches.
-                        xlWorkSheet.Shapes.AddPicture(value, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, Left, Top, img.Width/10, img.Height/10);
+                        xlWorkSheet.Shapes.AddPicture(value, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, Left, Top, img.Width/2, img.Height/2);
                     }
                     j++;
                 }
