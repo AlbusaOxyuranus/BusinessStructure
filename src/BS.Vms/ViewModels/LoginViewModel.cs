@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using BlackBee.Toolkit.Commands;
 using System.Threading.Tasks;
+using BS.WPF.Views.Pages;
 
 namespace BS.Vms.ViewModels
 {
@@ -16,7 +17,9 @@ namespace BS.Vms.ViewModels
 
         private async Task LogIn()
         {
-            await Task.Delay(100);
+            await Task.Delay(1);
+            Store.CreateOrGet<PriceViewModel>().LoadData();
+            Navigator.Instance.NavigationService.Navigate(new PriceView());
         }
     }
 }

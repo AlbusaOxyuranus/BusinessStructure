@@ -144,12 +144,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BS.Doc\BS.Doc.csproj">
-      <Project>{921e85fa-b44c-45e2-b9a3-cbf7026c6ad7}</Project>
-      <Name>BS.Doc</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="..\BS.Vms\BS.Vms.projitems" Label="Shared" />
