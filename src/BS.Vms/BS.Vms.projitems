@@ -22,6 +22,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AccountViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CustomerViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Menu\CategoryExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Menu\GategoryViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Menu\ItemMenu.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Menu\MenuViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PriceViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\price\ProductViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UserViewModel.cs" />

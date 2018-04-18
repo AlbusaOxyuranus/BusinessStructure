@@ -142,6 +142,9 @@
       <Name>BS.MSDLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gestionnaire_de_fichiers_Fluent_Design_Microsoft[1].png" />
+  </ItemGroup>
   <Import Project="..\BS.Vms\BS.Vms.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

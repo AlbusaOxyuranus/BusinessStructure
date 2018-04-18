@@ -177,7 +177,7 @@ namespace BS.Vms.ViewModels
                         }
                     }
 
-                    var items = res.FindAll(x => x.ProductPublish == 1
+                    var items = res.FindAll(x => x.ProductPublish == 1 && x.Name.Contains("k")
                                                  );
                     Bitmap bitmap = null;
                     using (var clientLogo = new WebClient())

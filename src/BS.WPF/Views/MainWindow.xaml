@@ -3,9 +3,148 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:menu="clr-namespace:Geliada.DesktopApp.ViewModels.Menu"
         mc:Ignorable="d"
-        Title="Бизнес структура" Height="450" Width="800">
-    <Grid>
-        <Frame x:Name="FrameNavigator" Source="/BS.WPF;component/Views/Pages/LoginView.xaml" Margin="20,18,20,20" NavigationUIVisibility="Hidden"></Frame>
+        Title="Бизнес структура" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance menu:MenuViewModel}"
+        
+        >
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="bool2visibility" />
+
+        <Style x:Key="categoryButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Foreground" Value="#FFB4B2B2" />
+            <Setter Property="Background" Value="#FFF98508" />
+            <Setter Property="BorderBrush" Value="#FF232323" />
+            <Setter Property="Padding" Value="5,2" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="{TemplateBinding Background}"
+                    CornerRadius="0"
+                    Padding="{TemplateBinding Padding}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Foreground" Value="#FFDCDCDC" />
+                    <Setter Property="Background" Value="#7F181B1B" />
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter Property="Foreground" Value="#FFB4B2B2" />
+                    <Setter Property="Background" Value="White" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="Background" Value="#FF309ED8" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="openExpanderItems" TargetType="{x:Type ItemsControl}">
+            <Setter Property="Foreground" Value="#FFB4B2B2" />
+            <Setter Property="Background" Value="#FFAFABAB" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FF413D43">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="247*"/>
+            <RowDefinition Height="172*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Grid.ColumnSpan="2" Fill="#FF323136" Grid.Row="1" RadiusX="10"/>
+        <Rectangle Grid.Column="1" Fill="#FFF4F4F5" Stroke="Black" RadiusX="10" Margin="0,-21.928,-15.254,-26.695" Grid.RowSpan="2">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="53" Direction="473" ShadowDepth="20"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Image Margin="29.525,177,0,-306.471" Source="/BS.WPF;component/Gestionnaire_de_fichiers_Fluent_Design_Microsoft[1].png" Stretch="Fill" Grid.Column="1" Grid.Row="1" Visibility="Collapsed"/>
+        <Frame x:Name="FrameNavigator" Source="/BS.WPF;component/Views/Pages/LoginView.xaml" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.RowSpan="2"/>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0" Margin="10">
+        <ItemsControl ItemsSource="{Binding Gategoryes}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <ToggleButton x:Name="tbCategory" Style="{StaticResource categoryButton}" Cursor="Hand">
+                            <Grid VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Name}" FontSize="14" Foreground="Black" TextWrapping="WrapWithOverflow" Margin="4,2" />
+                            </Grid>
+                        </ToggleButton>
+
+                        <ItemsControl ItemsSource="{Binding Items}"
+                            Style="{StaticResource openExpanderItems}"
+                            Visibility="{Binding IsChecked, ElementName=tbCategory, Converter={StaticResource bool2visibility}}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border x:Name="bdMovie" BorderThickness="0">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="4" />
+                                                <RowDefinition />
+                                                <RowDefinition Height="4" />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Grid.Row="1"
+                                   Grid.Column="0"
+                                   Text="{Binding Name}"
+                                   FontSize="14"
+                                   TextWrapping="WrapWithOverflow"
+                                   Cursor="Hand"
+                                   Foreground="Black"
+                                   Margin="16,0,0,0">
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip Content="{Binding Name}" ContentStringFormat="Click here to view {0}." />
+                                                </TextBlock.ToolTip>
+                                                <TextBlock.InputBindings>
+                                                    <MouseBinding Command="{Binding GetPageCommmand}" MouseAction="LeftClick" />
+                                                </TextBlock.InputBindings>
+                                            </TextBlock>
+
+
+
+                                            <Path Grid.Row="3"
+                              Grid.ColumnSpan="2"
+                              Data="M0,44.956 L312.00641,44.956"
+                              Height="1"
+                              Stretch="Fill"
+                              VerticalAlignment="bottom"
+                              Stroke="#7FCBCBCB"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        </ScrollViewer>
+
     </Grid>
 </Window>
