@@ -5,15 +5,18 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using BlackBee.Toolkit.Base;
 using BlackBee.Toolkit.Commands;
 using BS.Vms.JShoping.ImExPrice.BAL;
 using BS.Vms.ViewModels.price;
+using BS.WPF.Views.Pages;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 using XlHAlign = Microsoft.Office.Interop.Excel.XlHAlign;
@@ -66,6 +69,16 @@ namespace BS.Vms.ViewModels
         {
             _list = new ObservableCollection<ProductViewModel>();
             CreatePriceExcelCommand = AsyncCommand.Create(CreatePriceExcel);
+            NavigateMainCommand = AsyncCommand.Create(NavigateMain);
+        }
+        public IAsyncCommand NavigateMainCommand { get; private set; }
+        private async Task NavigateMain()
+        {
+
+
+            Navigator.Instance.NavigationService.Navigate(new PreviewOperationView());
+            
+
         }
 
         public IAsyncCommand CreatePriceExcelCommand { get; }
@@ -190,13 +203,12 @@ namespace BS.Vms.ViewModels
 
                     else
                     {
-                        var di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "Cache");
+                        //var di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "Cache");
 
-                        foreach (var file in di.GetFiles()) file.Delete();
+                        //foreach (var file in di.GetFiles()) file.Delete();
                     }
 
-                    var items = res.FindAll(x => x.ProductPublish == 1 // && x.ImageUrl.Contains("k")
-                    );
+                    var items = res.FindAll(x => x.ProductPublish == 1 && x.ImageUrl.Contains("R"));
                     Bitmap bitmap = null;
                     using (var clientLogo = new WebClient())
                     {

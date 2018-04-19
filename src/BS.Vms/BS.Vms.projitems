@@ -11,8 +11,10 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ImageConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JShoping\ImExPrice\BAL\ImExPriceBusinessContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JShoping\ImExPrice\BAL\Models\ClientModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JShoping\ImExPrice\BAL\Models\ExtraFieldsValuesModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JShoping\ImExPrice\BAL\Models\ProductModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JShoping\ImExPrice\DAL\Classes\Client.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JShoping\ImExPrice\DAL\Classes\ExtraFieldsValues.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JShoping\ImExPrice\DAL\Classes\Product.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JShoping\ImExPrice\DAL\ImExPriceDataContext.cs" />
@@ -20,12 +22,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Navigator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TaskHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AccountViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ClientViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CustomerViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Menu\CategoryExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Menu\GategoryViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Menu\ItemMenu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Menu\MenuViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PreviewOperationViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PriceViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\price\ProductViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UserViewModel.cs" />

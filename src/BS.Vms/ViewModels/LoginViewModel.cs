@@ -11,7 +11,7 @@ namespace BS.Vms.ViewModels
     {
         private string _userName;
         private string _userPassword;
-        public ICommand LogInCommand { get; }
+        public IAsyncCommand LogInCommand { get; }
 
         public LoginViewModel()
         {
@@ -40,14 +40,14 @@ namespace BS.Vms.ViewModels
 
         private async Task LogIn()
         {
-            if (UserName == "monnaanna" && UserPassword == "12345")
+            //if (UserName == "monnaanna" && UserPassword == "12345")
             {
                 Store.CreateOrGet<MenuViewModel>().LoadData();
                 await Task.Delay(1);
 
-                Store.CreateOrGet<PriceViewModel>().LoadData();
+                //Store.CreateOrGet<PriceViewModel>().LoadData();
 
-                Navigator.Instance.NavigationService.Navigate(new PriceView());
+                Navigator.Instance.NavigationService.Navigate(new PreviewOperationView());
             }
         }
     }

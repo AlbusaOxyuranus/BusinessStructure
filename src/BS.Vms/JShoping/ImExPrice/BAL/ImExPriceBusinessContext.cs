@@ -29,6 +29,17 @@ namespace BS.Vms.JShoping.ImExPrice.BAL
         {
             return await ProductsContext.GetExtraFieldsValuesAsync();
         }
+
+        public async Task<List<ClientModel>> GetClientsAsync()
+        {
+            var data = await(DataContext as ImExPriceDataContext).API_GET_Orders_Client();
+            var list = data.Select(l => new ClientModel
+            {
+                FirstName=l.FirstName,LastName=l.LastName, Email=l.Email,Street=l.Street,
+                City=l.City,Phone=l.Phone
+            }).ToList();
+            return list;
+        }
     }
 
     public class ProductsContext
