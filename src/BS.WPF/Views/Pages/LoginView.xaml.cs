@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using BlackBee.Toolkit.Base;
 using BS.Vms.ViewModels;
 
 namespace BS.WPF.Views.Pages
@@ -11,7 +13,13 @@ namespace BS.WPF.Views.Pages
         public LoginView()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
+            DataContext = Store.CreateOrGet<LoginViewModel>();
+        }
+
+        private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            { Store.CreateOrGet<LoginViewModel>().UserPassword = ((PasswordBox)sender).Password; }
         }
     }
 }

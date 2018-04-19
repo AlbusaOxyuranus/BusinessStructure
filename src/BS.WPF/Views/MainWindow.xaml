@@ -81,7 +81,7 @@
         <Image Margin="29.525,177,0,-306.471" Source="/BS.WPF;component/Gestionnaire_de_fichiers_Fluent_Design_Microsoft[1].png" Stretch="Fill" Grid.Column="1" Grid.Row="1" Visibility="Collapsed"/>
         <Frame x:Name="FrameNavigator" Source="/BS.WPF;component/Views/Pages/LoginView.xaml" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.RowSpan="2"/>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0" Margin="10">
+        <!--<ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0" Margin="10">
         <ItemsControl ItemsSource="{Binding Gategoryes}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
@@ -144,7 +144,7 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        </ScrollViewer>
+        </ScrollViewer>-->
 
     </Grid>
 </Window>

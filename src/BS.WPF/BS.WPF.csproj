@@ -145,6 +145,9 @@
   <ItemGroup>
     <Resource Include="Gestionnaire_de_fichiers_Fluent_Design_Microsoft[1].png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="motion.png" />
+  </ItemGroup>
   <Import Project="..\BS.Vms\BS.Vms.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
