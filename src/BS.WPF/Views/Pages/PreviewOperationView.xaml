@@ -11,9 +11,12 @@
       Title="PreviewOperationView">
 
     <Grid>
-        <StackPanel>
-            <Button Content="Price" Command="{Binding GetPriceAsyncCommand, Mode=OneWay}" ></Button>
-            <Button Content="Contact" Command="{Binding GetContactsAsyncCommand, Mode=OneWay}"></Button>
-        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Price" Command="{Binding GetPriceAsyncCommand, Mode=OneWay}"  Height="75" Width="200"></Button>
+            <Button Content="Contact" Command="{Binding GetContactsAsyncCommand, Mode=OneWay}" Height="75" Width="200"></Button>
+            <Button Content="Contact" Command="{Binding GetClientsAsyncCommand, Mode=OneWay}" Height="75" Width="200"></Button>
+            </StackPanel>
+        
+        
     </Grid>
 </Page>

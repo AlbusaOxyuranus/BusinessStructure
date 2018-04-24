@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)TaskHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AccountViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ClientViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\OrderViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CustomerViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Menu\CategoryExtension.cs" />
