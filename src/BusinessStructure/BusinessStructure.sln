@@ -35,11 +35,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessStructure.WPF", "WP
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BusinessStructure.SUC", "BusinessStructure.SUC\BusinessStructure.SUC.shproj", "{64E0818F-AC49-42B1-8BD0-279840E01544}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BusinessStructure.Vms", "BusinessStructure.Vms\BusinessStructure.Vms.shproj", "{E09536BF-40A8-4885-B363-9176E1175E39}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		BusinessStructure.SUC\BusinessStructure.SUC.projitems*{64e0818f-ac49-42b1-8bd0-279840e01544}*SharedItemsImports = 13
 		BusinessStructure.SUC\BusinessStructure.SUC.projitems*{bebe27e0-e2cc-44e4-8996-a37fac95f163}*SharedItemsImports = 4
 		..\BS.Vms\BS.Vms.projitems*{cd5933c9-27e2-4871-93fe-ca74610a0f83}*SharedItemsImports = 13
+		BusinessStructure.Vms\BusinessStructure.Vms.projitems*{e09536bf-40a8-4885-b363-9176e1175e39}*SharedItemsImports = 13
 		BusinessStructure.SUC\BusinessStructure.SUC.projitems*{e95ab565-a7a6-4e14-b54b-f034d02f2d5c}*SharedItemsImports = 4
 		..\BS.Vms\BS.Vms.projitems*{f6723960-734e-4eb2-ac36-aa9ce627660c}*SharedItemsImports = 4
 	EndGlobalSection
@@ -186,6 +189,7 @@ Global
 		{0944B0F2-E066-4A8D-B392-5182C99C6650} = {03E2637D-AFFE-4197-AF03-1299E739FB36}
 		{BEBE27E0-E2CC-44E4-8996-A37FAC95F163} = {0944B0F2-E066-4A8D-B392-5182C99C6650}
 		{64E0818F-AC49-42B1-8BD0-279840E01544} = {03E2637D-AFFE-4197-AF03-1299E739FB36}
+		{E09536BF-40A8-4885-B363-9176E1175E39} = {03E2637D-AFFE-4197-AF03-1299E739FB36}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F156028C-49F0-488A-B86F-503F32EF9F1C}
