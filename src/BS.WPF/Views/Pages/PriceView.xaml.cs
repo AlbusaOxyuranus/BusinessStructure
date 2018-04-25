@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using BlackBee.Toolkit.Base;
 using BlackBee.Toolkit.Controls;
 using BS.Vms.ViewModels;
@@ -16,6 +17,11 @@ namespace BS.WPF.Views.Pages
             CreateIndicate(MainGrid);
             DataContext = Store.CreateOrGet<PriceViewModel>();
            
+        }
+
+        private async void PriceView_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            await Store.CreateOrGet<PriceViewModel>().LoadData();
         }
     }
 }

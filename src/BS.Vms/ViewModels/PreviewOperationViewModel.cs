@@ -1,5 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using BlackBee.Toolkit.Base;
 using BlackBee.Toolkit.Commands;
 using BS.WPF.Views.Pages;
@@ -10,40 +10,28 @@ namespace BS.Vms.ViewModels
     {
         public PreviewOperationViewModel()
         {
-            GetPriceAsyncCommand = AsyncCommand.Create(GetPriceAsync);
-            GetContactsAsyncCommand = AsyncCommand.Create(GetContactsAsync);
-            GetClientsAsyncCommand = AsyncCommand.Create(GetClientsAsync);
+            GetPriceAsyncCommand = new RelayCommand(PriceViewNavigated);
+            GetContactsAsyncCommand = new RelayCommand(ContactsViewNavigated);
+            GetClientsAsyncCommand = new RelayCommand(ClientViewNavigated);
         }
 
-        public IAsyncCommand GetPriceAsyncCommand { get; }
+        public ICommand GetPriceAsyncCommand { get; }
 
-        public IAsyncCommand GetContactsAsyncCommand { get; }
-        public IAsyncCommand GetClientsAsyncCommand { get; }
+        public ICommand GetContactsAsyncCommand { get; }
+        public ICommand GetClientsAsyncCommand { get; }
 
-        private async Task GetClientsAsync()
+        private void ClientViewNavigated()
         {
-            await Task.Delay(1);
-
-            //await Store.CreateOrGet<OrderViewModel>().LoadData();
-
             Navigator.Instance.NavigationService.Navigate(new ClientView());
         }
 
-        private async Task GetContactsAsync()
+        private void ContactsViewNavigated()
         {
-            await Task.Delay(1);
-
-            Store.CreateOrGet<OrderViewModel>().LoadData();
-
             Navigator.Instance.NavigationService.Navigate(new OrderPage());
         }
 
-        private async Task GetPriceAsync()
+        private void PriceViewNavigated()
         {
-            await Task.Delay(1);
-
-            Store.CreateOrGet<PriceViewModel>().LoadData();
-
             Navigator.Instance.NavigationService.Navigate(new PriceView());
         }
     }

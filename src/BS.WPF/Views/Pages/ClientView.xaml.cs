@@ -1,4 +1,5 @@
-﻿using BlackBee.Toolkit.Base;
+﻿using System.Windows;
+using BlackBee.Toolkit.Base;
 using BlackBee.Toolkit.Controls;
 using BS.Vms.ViewModels;
 
@@ -14,6 +15,11 @@ namespace BS.WPF.Views.Pages
             InitializeComponent();
             CreateIndicate(MainGrid);
             DataContext = Store.CreateOrGet<BS.Vms.ViewModels.ClientViewModel>();
+        }
+
+        private void ClientView_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
