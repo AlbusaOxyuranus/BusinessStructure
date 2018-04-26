@@ -7,5 +7,6 @@ namespace BusinessStructure.Vms
     /// </summary>
     public class LogonViewModel : ViewModelBase
     {
+
     }
 }
