@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BlackBee.Toolkit.Base;
 
 namespace BusinessStructure.Vms
 {
-    class LogonViewModel
+    /// <summary>
+    /// This class implements the logon logic.
+    /// </summary>
+    public class LogonViewModel : ViewModelBase
     {
     }
 }

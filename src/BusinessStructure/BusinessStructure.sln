@@ -41,9 +41,11 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		BusinessStructure.SUC\BusinessStructure.SUC.projitems*{64e0818f-ac49-42b1-8bd0-279840e01544}*SharedItemsImports = 13
 		BusinessStructure.SUC\BusinessStructure.SUC.projitems*{bebe27e0-e2cc-44e4-8996-a37fac95f163}*SharedItemsImports = 4
+		BusinessStructure.Vms\BusinessStructure.Vms.projitems*{bebe27e0-e2cc-44e4-8996-a37fac95f163}*SharedItemsImports = 4
 		..\BS.Vms\BS.Vms.projitems*{cd5933c9-27e2-4871-93fe-ca74610a0f83}*SharedItemsImports = 13
 		BusinessStructure.Vms\BusinessStructure.Vms.projitems*{e09536bf-40a8-4885-b363-9176e1175e39}*SharedItemsImports = 13
 		BusinessStructure.SUC\BusinessStructure.SUC.projitems*{e95ab565-a7a6-4e14-b54b-f034d02f2d5c}*SharedItemsImports = 4
+		BusinessStructure.Vms\BusinessStructure.Vms.projitems*{e95ab565-a7a6-4e14-b54b-f034d02f2d5c}*SharedItemsImports = 4
 		..\BS.Vms\BS.Vms.projitems*{f6723960-734e-4eb2-ac36-aa9ce627660c}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

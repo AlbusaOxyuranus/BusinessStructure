@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BlackBee.Toolkit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BlackBee.ToolKit.1.0.180426.15\lib\net461\BlackBee.Toolkit.dll</HintPath>
+      <HintPath>..\..\packages\BlackBee.ToolKit.1.0.180426.16\lib\net461\BlackBee.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -98,5 +98,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="..\..\BusinessStructure.SUC\BusinessStructure.SUC.projitems" Label="Shared" />
+  <Import Project="..\..\BusinessStructure.Vms\BusinessStructure.Vms.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
