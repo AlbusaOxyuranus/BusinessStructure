@@ -150,20 +150,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BS.Bc\BS.Bc.csproj">
-      <Project>{2f22bad5-5c0a-430c-ba8a-2ee542b7d392}</Project>
-      <Name>BS.Bc</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BS.Services\BS.Services.csproj">
-      <Project>{24effe1b-2a6c-4769-bf4b-135bb41ecbe2}</Project>
-      <Name>BS.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BusinessStructure\BS.MSDLib\BS.MSDLib.csproj">
-      <Project>{135a4c2e-cae3-4072-bd52-d9fd5011147f}</Project>
-      <Name>BS.MSDLib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Gestionnaire_de_fichiers_Fluent_Design_Microsoft[1].png" />
   </ItemGroup>
   <ItemGroup>
@@ -1153,6 +1139,5 @@
     <Content Include="Icons\SVG\zoom-in.svg" />
     <Content Include="Icons\SVG\zoom-out.svg" />
   </ItemGroup>
-  <Import Project="..\BS.Vms\BS.Vms.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

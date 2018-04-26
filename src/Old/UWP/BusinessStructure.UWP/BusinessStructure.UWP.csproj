@@ -134,8 +134,6 @@
       <Version>6.0.8</Version>
     </PackageReference>
   </ItemGroup>
-  <Import Project="..\..\BusinessStructure\BusinessStructure.SUC\BusinessStructure.SUC.projitems" Label="Shared" />
-  <Import Project="..\..\BusinessStructure\BusinessStructure.Vms\BusinessStructure.Vms.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
