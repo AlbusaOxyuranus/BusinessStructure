@@ -28,8 +28,8 @@
     <InstallUrl>http://bs.xcs.by/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>3</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationVersion>1.0.0.5</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -67,16 +67,27 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BlackBee.Toolkit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BlackBee.ToolKit.1.0.180426.16\lib\net461\BlackBee.Toolkit.dll</HintPath>
+      <HintPath>..\..\..\packages\BlackBee.ToolKit.1.0.180427.2\lib\net461\BlackBee.Toolkit.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.HockeyApp.Core45, Version=4.1.6.1005, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\HockeySDK.WPF.4.1.6\lib\net45\Microsoft.HockeyApp.Core45.dll</HintPath>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.HockeyApp.Kit, Version=4.1.6.1005, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\HockeySDK.WPF.4.1.6\lib\net45\Microsoft.HockeyApp.Kit.dll</HintPath>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\packages\Microsoft.Office.Interop.Word.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\packages\MicrosoftOfficeCore.15.0.0\lib\net35\Office.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -95,7 +106,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="BC\BussinessContext.cs" />
+    <Compile Include="BC\IBussinessContext.cs" />
+    <Compile Include="BC\IModeApp.cs" />
+    <Compile Include="Views\Pages\AccountView.xaml.cs">
+      <DependentUpon>AccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ClientView.xaml.cs">
+      <DependentUpon>ClientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\OrderPage.xaml.cs">
+      <DependentUpon>OrderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PreviewOperationView.xaml.cs">
+      <DependentUpon>PreviewOperationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PriceView.xaml.cs">
+      <DependentUpon>PriceView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -103,10 +135,64 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="ViewModels\ImageConverter.cs" />
+    <Compile Include="ViewModels\JShoping\ImExPrice\BAL\ImExPriceBusinessContext.cs" />
+    <Compile Include="ViewModels\JShoping\ImExPrice\BAL\Models\ClientModel.cs" />
+    <Compile Include="ViewModels\JShoping\ImExPrice\BAL\Models\ExtraFieldsValuesModel.cs" />
+    <Compile Include="ViewModels\JShoping\ImExPrice\BAL\Models\ProductModel.cs" />
+    <Compile Include="ViewModels\JShoping\ImExPrice\DAL\Classes\Client.cs" />
+    <Compile Include="ViewModels\JShoping\ImExPrice\DAL\Classes\ExtraFieldsValues.cs" />
+    <Compile Include="ViewModels\JShoping\ImExPrice\DAL\Classes\Product.cs" />
+    <Compile Include="ViewModels\JShoping\ImExPrice\DAL\ImExPriceDataContext.cs" />
+    <Compile Include="ViewModels\ModeApp.cs" />
+    <Compile Include="ViewModels\Navigator.cs" />
+    <Compile Include="ViewModels\TaskHelper.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\ViewModels\ClientViewModel.cs" />
+    <Compile Include="ViewModels\ViewModels\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\ViewModels\Menu\CategoryExtension.cs" />
+    <Compile Include="ViewModels\ViewModels\Menu\GategoryViewModel.cs" />
+    <Compile Include="ViewModels\ViewModels\Menu\ItemMenu.cs" />
+    <Compile Include="ViewModels\ViewModels\Menu\MenuViewModel.cs" />
+    <Compile Include="ViewModels\ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\ViewModels\PreviewOperationViewModel.cs" />
+    <Compile Include="ViewModels\ViewModels\PriceViewModel.cs" />
+    <Compile Include="ViewModels\ViewModels\price\ProductViewModel.cs" />
+    <Compile Include="ViewModels\ViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\ViewModels\YourViewModel.cs" />
+    <Compile Include="ViewModels\Word\WordDocument.cs" />
+    <Compile Include="ViewModels\Word\WordGeneration.cs" />
+    <Compile Include="ViewModels\Word\WordSelection.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Pages\AccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Views\Pages\ClientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Views\Pages\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Views\Pages\OrderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Views\Pages\PreviewOperationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Views\Pages\PriceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -147,6 +233,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="motion.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

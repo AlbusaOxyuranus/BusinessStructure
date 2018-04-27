@@ -1,0 +1,18 @@
+﻿<controls1:BusyIndicatorPage x:Class="BusinessStructure.WPF.Views.Pages.ClientView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:BusinessStructure.WPF.Views.Pages"
+      xmlns:controls="clr-namespace:BlackBee.Toolkit.Controls;assembly=BlackBee.Toolkit"
+      xmlns:controls1="clr-namespace:BlackBee.Toolkit.Controls;assembly=BlackBee.Toolkit"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ClientView" Loaded="ClientView_OnLoaded">
+    <controls1:BusyIndicatorPage.BusyIndicator>
+        <controls1:BusyIndicatorControl LoadState="{Binding BussinessProcess, Mode=TwoWay}"
+                                       Message="{Binding BussinessProcessMessage}"
+                                       Value="{Binding PercentProcess, Mode=TwoWay}" />
+    </controls1:BusyIndicatorPage.BusyIndicator>
+    <Grid x:Name="MainGrid" />
+</controls1:BusyIndicatorPage>
