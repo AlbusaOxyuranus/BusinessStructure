@@ -4,12 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:menu="clr-namespace:Geliada.DesktopApp.ViewModels.Menu"
+        xmlns:viewModels="clr-namespace:BusinessStructure.WPF.ViewModels"
         mc:Ignorable="d"
         Title="Бизнес структура" Height="450" Width="800"
         d:DataContext="{d:DesignInstance menu:MenuViewModel}"
         
         >
     <Window.Resources>
+        <viewModels:HelperVersion x:Key="HelperVersion"/>
         <BooleanToVisibilityConverter x:Key="bool2visibility" />
 
         <Style x:Key="categoryButton" TargetType="{x:Type ToggleButton}">
@@ -78,8 +80,14 @@
                 <DropShadowEffect BlurRadius="53" Direction="473" ShadowDepth="20"/>
             </Rectangle.Effect>
         </Rectangle>
-        <Image Margin="29.525,177,0,-306.471" Source="/BusinessStructure.WPF;component/Gestionnaire_de_fichiers_Fluent_Design_Microsoft[1].png" Stretch="Fill" Grid.Column="1" Grid.Row="1" Visibility="Collapsed"/>
+        <!--<Image Margin="29.525,177,0,-306.471" Source="/BusinessStructure.WPF;component/Gestionnaire_de_fichiers_Fluent_Design_Microsoft[1].png" Stretch="Fill" Grid.Column="1" Grid.Row="1" Visibility="Collapsed"/>-->
         <Frame x:Name="FrameNavigator" Source="/BusinessStructure.WPF;component/Views/Pages/LoginView.xaml" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.RowSpan="2"/>
+       <StackPanel Grid.Row="1" VerticalAlignment="Bottom" Margin="10">
+          
+           <TextBlock TextWrapping="Wrap" Text="{Binding GetProductName, Source={StaticResource HelperVersion}, StringFormat='Business Structure {0}'}" VerticalAlignment="Top" Foreground="AliceBlue"/>
+           <TextBlock TextWrapping="Wrap" Text="{Binding VersionValue, Source={StaticResource HelperVersion}, StringFormat='Version {0}'}" VerticalAlignment="Top" Foreground="AliceBlue"/>
+           <TextBlock   TextWrapping="Wrap" Text="{Binding GetNameDeveloper, Source={StaticResource HelperVersion}}" VerticalAlignment="Top" Foreground="AliceBlue"/>
+       </StackPanel>
 
         <!--<ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0" Margin="10">
         <ItemsControl ItemsSource="{Binding Gategoryes}">

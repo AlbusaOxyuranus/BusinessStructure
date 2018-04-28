@@ -5,13 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BusinessStructure.WPF.Views.Pages"
       xmlns:viewModels="clr-namespace:BusinessStructure.Vms.ViewModels"
+      xmlns:viewModels1="clr-namespace:BusinessStructure.WPF.ViewModels.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       d:DataContext="{d:DesignInstance viewModels:LoginViewModel}"
       Title="LoginView">
 
     <Grid>
-        <StackPanel Width="300" Height="300">
+        <StackPanel Width="300" Height="300" Margin="0,0,0,20">
             <Border Background="AliceBlue">
                 <!--<TextBlock Text="Бизнес структура" HorizontalAlignment="Center"></TextBlock>-->
                 <Image Source="../../motion.png" Width="150"></Image>
@@ -22,7 +23,10 @@
                 <TextBlock Text="имя пользователя"></TextBlock>
                 <TextBox Text="{Binding UserName, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="пароль"></TextBlock>
-                <PasswordBox x:Name="PasswordBox"  PasswordChanged="PasswordBox_OnPasswordChanged"/>
+        
+                <PasswordBox viewModels1:PasswordHelper.Attach="True" 
+                             viewModels1:PasswordHelper.Password="{Binding UserPassword, Mode=TwoWay}"  PasswordChanged="PasswordBox_OnPasswordChanged"
+                             />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20">
                     <Button Width="100" Content="Вход" Command="{Binding LogInCommand}"></Button>
                 </StackPanel>

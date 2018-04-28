@@ -16,6 +16,7 @@ namespace BusinessStructure.WPF.Views
             InitializeComponent();
             Navigator.Instance.NavigationService = FrameNavigator;
             DataContext = Store.CreateOrGet<MenuViewModel>();
+           
         }
 
         //private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
@@ -25,5 +26,6 @@ namespace BusinessStructure.WPF.Views
         //    DataContext = model;
         //}
     }
+
 
 }

@@ -5,12 +5,10 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using BlackBee.Toolkit.Base;
 using BlackBee.Toolkit.Commands;
@@ -19,6 +17,7 @@ using BusinessStructure.Vms.ViewModels.price;
 using BusinessStructure.WPF.Views.Pages;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
+using Microsoft.Win32;
 using XlHAlign = Microsoft.Office.Interop.Excel.XlHAlign;
 using XlVAlign = Microsoft.Office.Interop.Excel.XlVAlign;
 
@@ -71,14 +70,12 @@ namespace BusinessStructure.Vms.ViewModels
             CreatePriceExcelCommand = AsyncCommand.Create(CreatePriceExcel);
             NavigateMainCommand = AsyncCommand.Create(NavigateMain);
         }
-        public IAsyncCommand NavigateMainCommand { get; private set; }
+
+        public IAsyncCommand NavigateMainCommand { get; }
+
         private async Task NavigateMain()
         {
-
-
             Navigator.Instance.NavigationService.Navigate(new PreviewOperationView());
-            
-
         }
 
         public IAsyncCommand CreatePriceExcelCommand { get; }
@@ -95,87 +92,107 @@ namespace BusinessStructure.Vms.ViewModels
 
         private async Task CreatePriceExcel()
         {
-            Store.CreateOrGet<PriceViewModel>().PercentProcess = 0;
-            Store.CreateOrGet<PriceViewModel>().BussinessProcess = true;
-            await TaskHelper.RunAsync(() =>
+            var saveFileDialog1 = new SaveFileDialog();
+            string filename = "Price" + "-" + Convert.ToDateTime(DateTime.Now).ToString("yyMMdd") + ".xls";
+            saveFileDialog1.Filter = "excel files (*.xls)|*.xls";
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.FileName = filename;
+            if (saveFileDialog1.ShowDialog() == true)
             {
-                var expList = new List<Exp>();
+                Store.CreateOrGet<PriceViewModel>().PercentProcess = 0;
+                Store.CreateOrGet<PriceViewModel>().BussinessProcess = true;
 
-                var list = new List<Exp>();
-                var ids = new Exp
-                {
-                    NameRow = "№",
-                    TypeExp = TypeExp.INT,
-                    VerticalAlignmentText = VerticalAlignmentText.Center
-                };
-                var names = new Exp
-                {
-                    NameRow = "Наименование товара",
-                    VerticalAlignmentText = VerticalAlignmentText.Center
-                };
-                var images = new Exp {NameRow = "Изображение", TypeExp = TypeExp.IMAGE};
-                var WeightVolumeUnits = new Exp
-                {
-                    NameRow = "Количество в упаковке",
-                    TypeExp = TypeExp.INT,
-                    HorizontalAlignmentText = HorizontalAlignmentText.Center,
-                    VerticalAlignmentText = VerticalAlignmentText.Center
-                };
-                var Price_Byn_units = new Exp
-                {
-                    NameRow = "Цена за единицу товара BYN",
-                    TypeExp = TypeExp.DOUBLE,
-                    HorizontalAlignmentText = HorizontalAlignmentText.Center,
-                    VerticalAlignmentText = VerticalAlignmentText.Center
-                };
-                var Price_Byn = new Exp
-                {
-                    NameRow = "Цена за упаковку BYN",
-                    TypeExp = TypeExp.DOUBLE,
-                    HorizontalAlignmentText = HorizontalAlignmentText.Center,
-                    VerticalAlignmentText = VerticalAlignmentText.Center
-                };
-                var Sostav = new Exp
-                {
-                    NameRow = "Состав",
-                    TypeExp = TypeExp.STRING,
-                    HorizontalAlignmentText = HorizontalAlignmentText.Center,
-                    VerticalAlignmentText = VerticalAlignmentText.Center
-                };
-                var Sizes = new Exp
-                {
-                    NameRow = "Размеры",
-                    TypeExp = TypeExp.STRING,
-                    HorizontalAlignmentText = HorizontalAlignmentText.Center,
-                    VerticalAlignmentText = VerticalAlignmentText.Center
-                };
-                //var priceUSD = new Exp() { NameRow = "Цена в USD", TypeExp = TypeExp.DOUBLE };
 
-                list.Add(ids);
-                list.Add(names);
-                list.Add(images);
-                list.Add(WeightVolumeUnits);
-                list.Add(Price_Byn_units);
-                list.Add(Price_Byn);
-                list.Add(Sostav);
-                list.Add(Sizes);
-                foreach (var prod in List)
+                await TaskHelper.RunAsync(() =>
                 {
-                    ids.ValueList.Add(prod.Id.ToString());
-                    names.ValueList.Add(prod.Name);
-                    images.ValueList.Add(prod.ImageBit);
-                    Price_Byn.ValueList.Add(prod.Price_Byn);
-                    WeightVolumeUnits.ValueList.Add(prod.WeightVolumeUnits.ToString());
-                    Price_Byn_units.ValueList.Add(prod.Price_Byn_unit);
-                    Sostav.ValueList.Add(prod.ExtraField2);
-                    Sizes.ValueList.Add(prod.ExtraField1);
-                }
+                    var expList = new List<Exp>();
 
-                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "price.xls"))
-                    File.Delete(AppDomain.CurrentDomain.BaseDirectory + "price.xls");
-                ImportExport.CreateExcelDocument(AppDomain.CurrentDomain.BaseDirectory, list);
-            });
-            Store.CreateOrGet<PriceViewModel>().BussinessProcess = false;
+                    var list = new List<Exp>();
+                    var ids = new Exp
+                    {
+                        NameRow = "№",
+                        TypeExp = TypeExp.INT,
+                        VerticalAlignmentText = VerticalAlignmentText.Center
+                    };
+                    var names = new Exp
+                    {
+                        NameRow = "Наименование товара",
+                        VerticalAlignmentText = VerticalAlignmentText.Center
+                    };
+                    var images = new Exp {NameRow = "Изображение", TypeExp = TypeExp.IMAGE};
+                    var WeightVolumeUnits = new Exp
+                    {
+                        NameRow = "Количество в упаковке",
+                        TypeExp = TypeExp.INT,
+                        HorizontalAlignmentText = HorizontalAlignmentText.Center,
+                        VerticalAlignmentText = VerticalAlignmentText.Center
+                    };
+                    var Price_Byn_units = new Exp
+                    {
+                        NameRow = "Цена за единицу товара BYN",
+                        TypeExp = TypeExp.DOUBLE,
+                        HorizontalAlignmentText = HorizontalAlignmentText.Center,
+                        VerticalAlignmentText = VerticalAlignmentText.Center
+                    };
+                    var Price_Byn = new Exp
+                    {
+                        NameRow = "Цена за упаковку BYN",
+                        TypeExp = TypeExp.DOUBLE,
+                        HorizontalAlignmentText = HorizontalAlignmentText.Center,
+                        VerticalAlignmentText = VerticalAlignmentText.Center
+                    };
+                    var Sostav = new Exp
+                    {
+                        NameRow = "Состав",
+                        TypeExp = TypeExp.STRING,
+                        HorizontalAlignmentText = HorizontalAlignmentText.Center,
+                        VerticalAlignmentText = VerticalAlignmentText.Center
+                    };
+                    var Sizes = new Exp
+                    {
+                        NameRow = "Размеры",
+                        TypeExp = TypeExp.STRING,
+                        HorizontalAlignmentText = HorizontalAlignmentText.Center,
+                        VerticalAlignmentText = VerticalAlignmentText.Center
+                    };
+                    //var priceUSD = new Exp() { NameRow = "Цена в USD", TypeExp = TypeExp.DOUBLE };
+
+                    list.Add(ids);
+                    list.Add(names);
+                    list.Add(images);
+                    list.Add(WeightVolumeUnits);
+                    list.Add(Price_Byn_units);
+                    list.Add(Price_Byn);
+                    list.Add(Sostav);
+                    list.Add(Sizes);
+                    foreach (var prod in List)
+                    {
+                        ids.ValueList.Add(prod.Id.ToString());
+                        names.ValueList.Add(prod.Name);
+                        images.ValueList.Add(prod.ImageBit);
+                        Price_Byn.ValueList.Add(prod.Price_Byn);
+                        WeightVolumeUnits.ValueList.Add(prod.WeightVolumeUnits.ToString());
+                        Price_Byn_units.ValueList.Add(prod.Price_Byn_unit);
+                        Sostav.ValueList.Add(prod.ExtraField2);
+                        Sizes.ValueList.Add(prod.ExtraField1);
+                    }
+                    
+                    if (saveFileDialog1.FileName != String.Empty)
+                    {
+                        var pathDirectory=System.IO.Path.GetDirectoryName(saveFileDialog1.FileName);
+                        ImportExport.CreateExcelDocument(pathDirectory,System.IO.Path.GetFileName(saveFileDialog1.FileName), list);
+                    }
+                    else
+                    {
+                        
+                        if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "price.xls"))
+                            File.Delete(AppDomain.CurrentDomain.BaseDirectory + "price.xls");
+                        ImportExport.CreateExcelDocument(AppDomain.CurrentDomain.BaseDirectory, filename, list);
+                    }
+                });
+                Store.CreateOrGet<PriceViewModel>().BussinessProcess = false;
+            }
         }
 
         public static async Task<ObservableCollection<ProductViewModel>> GetProducts()
@@ -201,14 +218,11 @@ namespace BusinessStructure.Vms.ViewModels
                         Directory.CreateDirectory("Cache");
                     }
 
-                    else
-                    {
-                        //var di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "Cache");
-
-                        //foreach (var file in di.GetFiles()) file.Delete();
-                    }
-
+#if !DEBUG
                     var items = res.FindAll(x => x.ProductPublish == 1);// && x.ImageUrl.Contains("R"));
+                    #else
+                    var items = res.FindAll(x => x.ProductPublish == 1 && x.ImageUrl.Contains("R"));
+#endif
                     Bitmap bitmap = null;
                     using (var clientLogo = new WebClient())
                     {
@@ -388,7 +402,7 @@ namespace BusinessStructure.Vms.ViewModels
 
     public class ImportExport
     {
-        public static bool CreateExcelDocument(string directoryPath, List<Exp> dictionary)
+        public static bool CreateExcelDocument(string directoryPath,string filename, List<Exp> dictionary)
         {
             var xlApp = new Application();
             Workbook xlWorkBook;
@@ -532,7 +546,7 @@ namespace BusinessStructure.Vms.ViewModels
             xlWorkSheet.Name = "Прайс";
             //xlWorkSheet.Shapes.AddPicture("C:\\csharp-xl-picture.JPG", Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, 50, 50, 300, 45);
             xlWorkBook.SaveAs(
-                directoryPath + "price" + "-" + Convert.ToDateTime(DateTime.Now).ToString("yyMMdd") + ".xls",
+                directoryPath + filename,
                 XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue,
                 misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(true, misValue, misValue);
