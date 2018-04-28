@@ -193,9 +193,13 @@ namespace BusinessStructure.Vms.ViewModels
                             File.Delete(AppDomain.CurrentDomain.BaseDirectory + "price.xls");
                         ImportExport.CreateExcelDocument(AppDomain.CurrentDomain.BaseDirectory, filename, list);
                     }
+
+                    MessageBox.Show("Прайс лист успешно создан", "Задача успешно выполнена", MessageBoxButton.OK,
+                        MessageBoxImage.Information);
                 });
                 Store.CreateOrGet<PriceViewModel>().BussinessProcess = false;
             }
+
         }
 
         public static async Task<ObservableCollection<ProductViewModel>> GetProducts()
