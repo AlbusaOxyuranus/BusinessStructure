@@ -9,6 +9,7 @@ using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 using BlackBee.Toolkit.Base;
 using BlackBee.Toolkit.Commands;
@@ -18,6 +19,7 @@ using BusinessStructure.WPF.Views.Pages;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Win32;
+using Application = Microsoft.Office.Interop.Excel.Application;
 using XlHAlign = Microsoft.Office.Interop.Excel.XlHAlign;
 using XlVAlign = Microsoft.Office.Interop.Excel.XlVAlign;
 
@@ -100,6 +102,7 @@ namespace BusinessStructure.Vms.ViewModels
             saveFileDialog1.FileName = filename;
             if (saveFileDialog1.ShowDialog() == true)
             {
+                Store.CreateOrGet<PriceViewModel>().BussinessProcessMessage = "Подготовка к выполнению процесса";
                 Store.CreateOrGet<PriceViewModel>().PercentProcess = 0;
                 Store.CreateOrGet<PriceViewModel>().BussinessProcess = true;
 
@@ -402,160 +405,168 @@ namespace BusinessStructure.Vms.ViewModels
 
     public class ImportExport
     {
-        public static bool CreateExcelDocument(string directoryPath,string filename, List<Exp> dictionary)
+        public static bool CreateExcelDocument(string directoryPath, string filename, List<Exp> dictionary)
         {
-            var xlApp = new Application();
-            Workbook xlWorkBook;
-            Worksheet xlWorkSheet;
-            object misValue = Missing.Value;
-
-            xlWorkBook = xlApp.Workbooks.Add(misValue);
-            xlWorkSheet = (Worksheet) xlWorkBook.Worksheets.get_Item(1);
-
-            var emptyLine = 4;
-            var countImage = 0;
-
-            // Выделяем диапазон ячеек от H1 до K1         
-            var _excelCells1 = xlWorkSheet.get_Range("A1", "B1").Cells;
-            // Производим объединение
-            _excelCells1.Merge(Type.Missing);
-            var oRangeLogo = (Range) xlWorkSheet.Cells[1, 1];
-            var img2 = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "Cache\\" + "Logo.png");
-            var Left2 = (float) (double) oRangeLogo.Left;
-            var Top2 = (float) (double) oRangeLogo.Top;
-            //const float ImageSize = 32;
-            oRangeLogo.RowHeight = img2.Height + 10;
-            oRangeLogo.ColumnWidth = 30; // (img.Width / 10 - 12 + 5) / 7d + 1;//From pixels to inches.
-            xlWorkSheet.Shapes.AddPicture(AppDomain.CurrentDomain.BaseDirectory + "Cache\\" + "Logo.png",
-                MsoTriState.msoFalse, MsoTriState.msoCTrue, Left2, Top2, img2.Width, img2.Height);
-
-            // Выделяем диапазон ячеек от H1 до K1         
-            var _excelCells2 = xlWorkSheet.get_Range("A2", "F2").Cells;
-            // Производим объединение
-            _excelCells2.Merge(Type.Missing);
-            var str = "Наименование: Индивидуальный предприниматель Сугак Надежда Анатольевна" + "\r\n" +
-                      "УНП: 190230096" +
-                      "Наш адрес: г.Минск, ул.Некрасова, дом 35 корпус 1" + "\r\n" +
-                      "График работы: Без выходных: c 9:00 до 21:00" + "\r\n" +
-                      "Телефоны: +375 29 6663173(VELCOM) + 375 29 1970178(VELCOM)" + "\r\n" +
-                      "nadski @yandex.ru";
-            _excelCells2.RowHeight = 78;
-            xlWorkSheet.Cells[2, 1] = str;
-            //_excelCells2.AutoFit();
-
-            // Выделяем диапазон ячеек от H1 до K1         
-            var _excelCells3 = xlWorkSheet.get_Range("A3", "F3").Cells;
-            // Производим объединение
-            _excelCells3.Merge(Type.Missing);
-            // xlWorkSheet.Cells[3, 1] = "Общие";
-
-            // Выделяем диапазон ячеек от H1 до K1         
-            var _excelCells4 = xlWorkSheet.get_Range("A4", "F4").Cells;
-            // Производим объединение
-            _excelCells4.Merge(Type.Missing);
-            xlWorkSheet.Cells[4, 1] = "Официальный сайт: http://monnaanna.by";
-
-            //// Выделяем диапазон ячеек от O1 до Q1         
-            //Microsoft.Office.Interop.Excel.Range _excelCells2 = (Microsoft.Office.Interop.Excel..Range)xlWorkSheet.get_Range("O1", "Q1").Cells;
-            //// Производим объединение
-            //_excelCells2.Merge(Type.Missing);
-            //xlWorkSheet.Cells[1, 15] = "Общие";
-
-            for (var i = 0; i < dictionary.Count; i++)
+            try
             {
-                var j = 2 + emptyLine;
-                xlWorkSheet.Cells[j - 1, i + 1] = dictionary[i].NameRow;
-                foreach (var value in dictionary[i].ValueList)
+                var xlApp = new Application();
+                Workbook xlWorkBook;
+                Worksheet xlWorkSheet;
+                object misValue = Missing.Value;
+
+                xlWorkBook = xlApp.Workbooks.Add(misValue);
+                xlWorkSheet = (Worksheet) xlWorkBook.Worksheets.get_Item(1);
+
+                var emptyLine = 4;
+                var countImage = 0;
+
+                // Выделяем диапазон ячеек от H1 до K1         
+                var _excelCells1 = xlWorkSheet.get_Range("A1", "B1").Cells;
+                // Производим объединение
+                _excelCells1.Merge(Type.Missing);
+                var oRangeLogo = (Range) xlWorkSheet.Cells[1, 1];
+                var img2 = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "Cache\\" + "Logo.png");
+                var Left2 = (float) (double) oRangeLogo.Left;
+                var Top2 = (float) (double) oRangeLogo.Top;
+                //const float ImageSize = 32;
+                oRangeLogo.RowHeight = img2.Height + 10;
+                oRangeLogo.ColumnWidth = 30; // (img.Width / 10 - 12 + 5) / 7d + 1;//From pixels to inches.
+                xlWorkSheet.Shapes.AddPicture(AppDomain.CurrentDomain.BaseDirectory + "Cache\\" + "Logo.png",
+                    MsoTriState.msoFalse, MsoTriState.msoCTrue, Left2, Top2, img2.Width, img2.Height);
+
+                // Выделяем диапазон ячеек от H1 до K1         
+                var _excelCells2 = xlWorkSheet.get_Range("A2", "F2").Cells;
+                // Производим объединение
+                _excelCells2.Merge(Type.Missing);
+                var str = "Наименование: Индивидуальный предприниматель Сугак Надежда Анатольевна" + "\r\n" +
+                          "УНП: 190230096" +
+                          "Наш адрес: г.Минск, ул.Некрасова, дом 35 корпус 1" + "\r\n" +
+                          "График работы: Без выходных: c 9:00 до 21:00" + "\r\n" +
+                          "Телефоны: +375 29 6663173(VELCOM) + 375 29 1970178(VELCOM)" + "\r\n" +
+                          "nadski @yandex.ru";
+                _excelCells2.RowHeight = 78;
+                xlWorkSheet.Cells[2, 1] = str;
+                //_excelCells2.AutoFit();
+
+                // Выделяем диапазон ячеек от H1 до K1         
+                var _excelCells3 = xlWorkSheet.get_Range("A3", "F3").Cells;
+                // Производим объединение
+                _excelCells3.Merge(Type.Missing);
+                // xlWorkSheet.Cells[3, 1] = "Общие";
+
+                // Выделяем диапазон ячеек от H1 до K1         
+                var _excelCells4 = xlWorkSheet.get_Range("A4", "F4").Cells;
+                // Производим объединение
+                _excelCells4.Merge(Type.Missing);
+                xlWorkSheet.Cells[4, 1] = "Официальный сайт: http://monnaanna.by";
+
+                //// Выделяем диапазон ячеек от O1 до Q1         
+                //Microsoft.Office.Interop.Excel.Range _excelCells2 = (Microsoft.Office.Interop.Excel..Range)xlWorkSheet.get_Range("O1", "Q1").Cells;
+                //// Производим объединение
+                //_excelCells2.Merge(Type.Missing);
+                //xlWorkSheet.Cells[1, 15] = "Общие";
+
+                for (var i = 0; i < dictionary.Count; i++)
                 {
-                    countImage++;
-                    Store.CreateOrGet<PriceViewModel>().IsPercent = false;
-                    Store.CreateOrGet<PriceViewModel>().PercentProcess =
-                        100 * countImage / (dictionary.Count * dictionary[i].ValueList.Count);
-                    Store.CreateOrGet<PriceViewModel>().BussinessProcessMessage =
-                        "Обработка строк документа " + countImage + "  из " +
-                        dictionary.Count * dictionary[i].ValueList.Count;
-                    if (dictionary[i].TypeExp == TypeExp.STRING)
+                    var j = 2 + emptyLine;
+                    xlWorkSheet.Cells[j - 1, i + 1] = dictionary[i].NameRow;
+                    foreach (var value in dictionary[i].ValueList)
                     {
-                        var oRange = (Range) xlWorkSheet.Cells[j, i + 1];
-                        oRange.ColumnWidth = 30;
+                        countImage++;
+                        Store.CreateOrGet<PriceViewModel>().IsPercent = false;
+                        Store.CreateOrGet<PriceViewModel>().PercentProcess =
+                            100 * countImage / (dictionary.Count * dictionary[i].ValueList.Count);
+                        Store.CreateOrGet<PriceViewModel>().BussinessProcessMessage =
+                            "Обработка строк документа " + countImage + "  из " +
+                            dictionary.Count * dictionary[i].ValueList.Count;
+                        if (dictionary[i].TypeExp == TypeExp.STRING)
+                        {
+                            var oRange = (Range) xlWorkSheet.Cells[j, i + 1];
+                            oRange.ColumnWidth = 30;
 
-                        if (dictionary[i].HorizontalAlignmentText == HorizontalAlignmentText.Center)
-                            oRange.HorizontalAlignment = XlHAlign.xlHAlignCenter;
-                        if (dictionary[i].VerticalAlignmentText == VerticalAlignmentText.Center)
-                            oRange.VerticalAlignment = XlVAlign.xlVAlignCenter;
-                        oRange.ColumnWidth = 30;
-                        xlWorkSheet.Cells[j, i + 1] = value;
-                    }
-                    else if (dictionary[i].TypeExp == TypeExp.DOUBLE)
-                    {
-                        var oRange = (Range) xlWorkSheet.Cells[j, i + 1];
-                        if (dictionary[i].HorizontalAlignmentText == HorizontalAlignmentText.Center)
-                            oRange.HorizontalAlignment = XlHAlign.xlHAlignCenter;
-                        if (dictionary[i].VerticalAlignmentText == VerticalAlignmentText.Center)
-                            oRange.VerticalAlignment = XlVAlign.xlVAlignCenter;
-                        oRange.ColumnWidth = 30;
-                        xlWorkSheet.Cells[j, i + 1] = double.Parse(value);
-                    }
-                    else if (dictionary[i].TypeExp == TypeExp.INT)
-                    {
-                        var oRange = (Range) xlWorkSheet.Cells[j, i + 1];
-                        if (dictionary[i].HorizontalAlignmentText == HorizontalAlignmentText.Center)
-                            oRange.HorizontalAlignment = XlHAlign.xlHAlignCenter;
-                        if (dictionary[i].VerticalAlignmentText == VerticalAlignmentText.Center)
-                            oRange.VerticalAlignment = XlVAlign.xlVAlignCenter;
-                        oRange.ColumnWidth = 30;
-                        xlWorkSheet.Cells[j, i + 1] = int.Parse(value);
-                    }
-                    else if (dictionary[i].TypeExp == TypeExp.IMAGE)
-                    {
-                        ////Image oImage = Image.FromFile(value);
-                        ////System.Windows.Forms.Clipboard.SetDataObject(oImage, true);
-                        ////ThisSheet.Paste(oRange, _stLOGO);
-                        //object missing = System.Reflection.Missing.Value;
-                        //Microsoft.Office.Interop.Excel.Pictures p = xlWorkSheet.Pictures(missing) as Microsoft.Office.Interop.Excel.Pictures;
-                        //Microsoft.Office.Interop.Excel.Picture pic = null;
-                        ////Microsoft.Office.Interop.Excel.Range picPosition = GetPicturePosition(); // retrieve the range for picture insert
-                        //pic = p.Insert(value, missing);
-                        ////pic.Left = Convert.ToDouble(picPosition.Left);
-                        ////pic.Top = Convert.ToDouble(picPosition.Top);
+                            if (dictionary[i].HorizontalAlignmentText == HorizontalAlignmentText.Center)
+                                oRange.HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                            if (dictionary[i].VerticalAlignmentText == VerticalAlignmentText.Center)
+                                oRange.VerticalAlignment = XlVAlign.xlVAlignCenter;
+                            oRange.ColumnWidth = 30;
+                            xlWorkSheet.Cells[j, i + 1] = value;
+                        }
+                        else if (dictionary[i].TypeExp == TypeExp.DOUBLE)
+                        {
+                            var oRange = (Range) xlWorkSheet.Cells[j, i + 1];
+                            if (dictionary[i].HorizontalAlignmentText == HorizontalAlignmentText.Center)
+                                oRange.HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                            if (dictionary[i].VerticalAlignmentText == VerticalAlignmentText.Center)
+                                oRange.VerticalAlignment = XlVAlign.xlVAlignCenter;
+                            oRange.ColumnWidth = 30;
+                            xlWorkSheet.Cells[j, i + 1] = double.Parse(value);
+                        }
+                        else if (dictionary[i].TypeExp == TypeExp.INT)
+                        {
+                            var oRange = (Range) xlWorkSheet.Cells[j, i + 1];
+                            if (dictionary[i].HorizontalAlignmentText == HorizontalAlignmentText.Center)
+                                oRange.HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                            if (dictionary[i].VerticalAlignmentText == VerticalAlignmentText.Center)
+                                oRange.VerticalAlignment = XlVAlign.xlVAlignCenter;
+                            oRange.ColumnWidth = 30;
+                            xlWorkSheet.Cells[j, i + 1] = int.Parse(value);
+                        }
+                        else if (dictionary[i].TypeExp == TypeExp.IMAGE)
+                        {
+                            ////Image oImage = Image.FromFile(value);
+                            ////System.Windows.Forms.Clipboard.SetDataObject(oImage, true);
+                            ////ThisSheet.Paste(oRange, _stLOGO);
+                            //object missing = System.Reflection.Missing.Value;
+                            //Microsoft.Office.Interop.Excel.Pictures p = xlWorkSheet.Pictures(missing) as Microsoft.Office.Interop.Excel.Pictures;
+                            //Microsoft.Office.Interop.Excel.Picture pic = null;
+                            ////Microsoft.Office.Interop.Excel.Range picPosition = GetPicturePosition(); // retrieve the range for picture insert
+                            //pic = p.Insert(value, missing);
+                            ////pic.Left = Convert.ToDouble(picPosition.Left);
+                            ////pic.Top = Convert.ToDouble(picPosition.Top);
 
-                        //pic = p.Insert(value, missing);
-                        //xlWorkSheet.Cells[j, i + 1] = pic;
-                        ////xlWorkSheet.Cells[j, i + 1].Shapes.AddPicture(value, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, 50, 50, 300, 45);
-                        ////xlWorkSheet.Cells[j, i + 1] = int.Parse(value);
-                        var oRange = (Range) xlWorkSheet.Cells[j, i + 1];
-                        var img = Image.FromFile(value);
-                        var Left = (float) (double) oRange.Left;
-                        var Top = (float) (double) oRange.Top;
-                        //const float ImageSize = 32;
-                        oRange.RowHeight = img.Height / 3;
-                        oRange.ColumnWidth = 30; // (img.Width / 10 - 12 + 5) / 7d + 1;//From pixels to inches.
-                        xlWorkSheet.Shapes.AddPicture(value, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left, Top,
-                            img.Width / 3, img.Height / 3);
-                    }
+                            //pic = p.Insert(value, missing);
+                            //xlWorkSheet.Cells[j, i + 1] = pic;
+                            ////xlWorkSheet.Cells[j, i + 1].Shapes.AddPicture(value, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, 50, 50, 300, 45);
+                            ////xlWorkSheet.Cells[j, i + 1] = int.Parse(value);
+                            var oRange = (Range) xlWorkSheet.Cells[j, i + 1];
+                            var img = Image.FromFile(value);
+                            var Left = (float) (double) oRange.Left;
+                            var Top = (float) (double) oRange.Top;
+                            //const float ImageSize = 32;
+                            oRange.RowHeight = img.Height / 3;
+                            oRange.ColumnWidth = 30; // (img.Width / 10 - 12 + 5) / 7d + 1;//From pixels to inches.
+                            xlWorkSheet.Shapes.AddPicture(value, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left, Top,
+                                img.Width / 3, img.Height / 3);
+                        }
 
-                    j++;
+                        j++;
+                    }
                 }
+
+                //worksheet.AllocatedRange.AutoFitColumns();
+
+                //xlWorkSheet.Columns.AutoFit();
+                //xlWorkSheet.Rows.AutoFit();
+
+                xlWorkSheet.Name = "Прайс";
+                //xlWorkSheet.Shapes.AddPicture("C:\\csharp-xl-picture.JPG", Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, 50, 50, 300, 45);
+                xlWorkBook.SaveAs(
+                    directoryPath + filename,
+                    XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue,
+                    misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                xlWorkBook.Close(true, misValue, misValue);
+                xlApp.Quit();
+
+                Marshal.ReleaseComObject(xlWorkSheet);
+                Marshal.ReleaseComObject(xlWorkBook);
+                Marshal.ReleaseComObject(xlApp);
+                return true;
             }
-
-            //worksheet.AllocatedRange.AutoFitColumns();
-
-            //xlWorkSheet.Columns.AutoFit();
-            //xlWorkSheet.Rows.AutoFit();
-
-            xlWorkSheet.Name = "Прайс";
-            //xlWorkSheet.Shapes.AddPicture("C:\\csharp-xl-picture.JPG", Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, 50, 50, 300, 45);
-            xlWorkBook.SaveAs(
-                directoryPath + filename,
-                XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue,
-                misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
-            xlWorkBook.Close(true, misValue, misValue);
-            xlApp.Quit();
-
-            Marshal.ReleaseComObject(xlWorkSheet);
-            Marshal.ReleaseComObject(xlWorkBook);
-            Marshal.ReleaseComObject(xlApp);
-            return true;
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
         }
         //private void PlacePicture(Image picture, Range destination)
         //{
