@@ -245,5 +245,11 @@
   <ItemGroup>
     <Resource Include="motion.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="freddie-marriage-264214.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="jeshoots-com-219386.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
