@@ -14,7 +14,11 @@ namespace BS.AuthenticationService
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
-        // TODO: Добавьте здесь операции служб
+        [OperationContract]
+        RequestResult<UserResult,UserError> Login(string email, string password);
+
+        [OperationContract]
+        void ResetPassword(string email);
     }
 
 

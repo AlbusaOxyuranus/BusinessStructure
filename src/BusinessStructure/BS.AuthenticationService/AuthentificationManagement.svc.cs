@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace BS.AuthenticationService
 {
@@ -8,7 +9,7 @@ namespace BS.AuthenticationService
     {
         public string GetData(int value)
         {
-            return string.Format("You entered: {0}", value);
+            return $"You entered: {value}";
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
@@ -22,6 +23,20 @@ namespace BS.AuthenticationService
                 composite.StringValue += "Suffix";
             }
             return composite;
+        }
+
+        public RequestResult<UserResult,UserError> Login(string email, string password)
+        {
+            if(email!= "nadski@yandex.by" || password!="1")
+            {
+                return new RequestResult<UserResult,UserError>(null,new UserErrorList().Single(x=>x.UserErrorEnum==UserErrorEnum.NotFound));
+            }
+            return new RequestResult<UserResult, UserError>(new UserResult(){FullUserName = "Сугак Надежда Анатольевна"});
+        }
+
+        public void ResetPassword(string email)
+        {
+            throw new NotImplementedException();
         }
     }
 }

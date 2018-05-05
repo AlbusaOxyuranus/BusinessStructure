@@ -16,6 +16,9 @@ EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BusinessStructure.Vms", "Apps\BusinessStructure.Vms\BusinessStructure.Vms.shproj", "{E09536BF-40A8-4885-B363-9176E1175E39}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessStructure.WPF", "Apps\WPF\BusinessStructure.WPF\BusinessStructure.WPF.csproj", "{BEBE27E0-E2CC-44E4-8996-A37FAC95F163}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F} = {B88A7108-1A54-473E-8219-B2F3E5E4D49F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessStructure.UWP", "Apps\UWP\BusinessStructure.UWP\BusinessStructure.UWP.csproj", "{E95AB565-A7A6-4E14-B54B-F034D02F2D5C}"
 EndProject

@@ -94,6 +94,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -115,6 +116,11 @@
     <Compile Include="BC\BussinessContext.cs" />
     <Compile Include="BC\IBussinessContext.cs" />
     <Compile Include="BC\IModeApp.cs" />
+    <Compile Include="Connected Services\AService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\HelperVersion.cs" />
     <Compile Include="ViewModels\ViewModels\PasswordHelper.cs" />
     <Compile Include="Views\Pages\AccountView.xaml.cs">
@@ -221,6 +227,22 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="BusinessStructure.WPF_TemporaryKey.pfx" />
+    <None Include="Connected Services\AService\AuthentificationManagement.wsdl" />
+    <None Include="Connected Services\AService\AuthentificationManagement.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AService\AuthentificationManagement1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AService\AuthentificationManagement2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AService\BusinessStructure.WPF.AService.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\AService\BusinessStructure.WPF.AService.RequestResultOfUserResultUserErrorjphcqKqy.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -250,6 +272,27 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="jeshoots-com-219386.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\AService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AService\AuthentificationManagement.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
