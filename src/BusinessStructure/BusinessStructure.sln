@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessStructure.WPF", "Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessStructure.UWP", "Apps\UWP\BusinessStructure.UWP\BusinessStructure.UWP.csproj", "{E95AB565-A7A6-4E14-B54B-F034D02F2D5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BS.AuthenticationService", "BS.AuthenticationService\BS.AuthenticationService.csproj", "{B88A7108-1A54-473E-8219-B2F3E5E4D49F}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Apps\BusinessStructure.SUC\BusinessStructure.SUC.projitems*{64e0818f-ac49-42b1-8bd0-279840e01544}*SharedItemsImports = 13
@@ -71,6 +73,22 @@ Global
 		{E95AB565-A7A6-4E14-B54B-F034D02F2D5C}.Release|x86.ActiveCfg = Release|x86
 		{E95AB565-A7A6-4E14-B54B-F034D02F2D5C}.Release|x86.Build.0 = Release|x86
 		{E95AB565-A7A6-4E14-B54B-F034D02F2D5C}.Release|x86.Deploy.0 = Release|x86
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Debug|ARM.Build.0 = Debug|Any CPU
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Debug|x64.Build.0 = Debug|Any CPU
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Debug|x86.Build.0 = Debug|Any CPU
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Release|ARM.ActiveCfg = Release|Any CPU
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Release|ARM.Build.0 = Release|Any CPU
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Release|x64.ActiveCfg = Release|Any CPU
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Release|x64.Build.0 = Release|Any CPU
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Release|x86.ActiveCfg = Release|Any CPU
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +100,7 @@ Global
 		{E09536BF-40A8-4885-B363-9176E1175E39} = {03E2637D-AFFE-4197-AF03-1299E739FB36}
 		{BEBE27E0-E2CC-44E4-8996-A37FAC95F163} = {0944B0F2-E066-4A8D-B392-5182C99C6650}
 		{E95AB565-A7A6-4E14-B54B-F034D02F2D5C} = {C932F720-1D43-4370-B97F-6E9C6F4C7079}
+		{B88A7108-1A54-473E-8219-B2F3E5E4D49F} = {6947BD46-1950-4885-B798-540905470370}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F156028C-49F0-488A-B86F-503F32EF9F1C}
