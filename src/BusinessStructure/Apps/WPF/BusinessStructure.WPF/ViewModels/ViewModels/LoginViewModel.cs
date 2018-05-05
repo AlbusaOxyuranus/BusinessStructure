@@ -10,44 +10,37 @@ namespace BusinessStructure.Vms.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
+        public UserViewModel UserViewModel
+        {
+            get => _userViewModel;
+            set
+            {
+                _userViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
         public EventHandler ClearPasswordEventHandler = null;
-        private string _userName;
-        private string _userPassword;
+       
+        private UserViewModel _userViewModel;
         public IAsyncCommand LogInCommand { get; }
 
         public LoginViewModel()
         {
+            UserViewModel = Store.CreateOrGet<UserViewModel>();
             LogInCommand = AsyncCommand.Create(LogIn);
         }
 
-        public string UserName
-        {
-            get => _userName;
-            set
-            {
-                _userName = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string UserPassword
-        {
-            get => _userPassword;
-            set
-            {
-                _userPassword = value;
-                OnPropertyChanged();
-            }
-        }
+       
 
         private async Task LogIn()
         {
-            if (!string.IsNullOrEmpty(UserName) && !string.IsNullOrWhiteSpace(UserName)
-                                                && !string.IsNullOrEmpty(UserPassword) &&
-                                                !string.IsNullOrWhiteSpace(UserPassword))
+            if (!string.IsNullOrEmpty(UserViewModel.UserName) && !string.IsNullOrWhiteSpace(UserViewModel.UserName)
+                                                && !string.IsNullOrEmpty(UserViewModel.UserPassword) &&
+                                                !string.IsNullOrWhiteSpace(UserViewModel.UserPassword))
             {
                 var vClient = new AuthentificationManagementClient();
-                var result = await vClient.LoginAsync(UserName, UserPassword);
+                var result = await vClient.LoginAsync(UserViewModel.UserName, UserViewModel.UserPassword);
                 if (result.Error != null)
                 {
                     MessageBox.Show(result.Error.MessageError, "Ошибка", MessageBoxButton.OK,

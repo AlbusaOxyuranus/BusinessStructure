@@ -22,7 +22,7 @@ namespace BusinessStructure.WPF.Views.Pages
         private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
         {
             if (this.DataContext != null)
-            { Store.CreateOrGet<LoginViewModel>().UserPassword = ((PasswordBox)sender).Password; }
+            { Store.CreateOrGet<LoginViewModel>().UserViewModel.UserPassword = ((PasswordBox)sender).Password; }
         }
 
 

@@ -4,6 +4,7 @@ namespace BusinessStructure.ViewModels
 {
     public class UserViewModel : ViewModelBase
     {
-        UserViewModel User { get; }
+        public string UserName { get; set; }
+        public string FullName { get; set; }
     }
 }

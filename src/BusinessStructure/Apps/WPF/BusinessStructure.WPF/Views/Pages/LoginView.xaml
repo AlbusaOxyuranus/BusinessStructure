@@ -24,11 +24,11 @@
 
                     <TextBlock Text="Вход в систему" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold"/>
                     <TextBlock Text="имя пользователя"/>
-                <TextBox Text="{Binding UserName, Mode=TwoWay}"/>
+                    <TextBox Text="{Binding UserViewModel.UserName, Mode=TwoWay}"/>
                 <TextBlock Text="пароль"/>
 
                 <PasswordBox viewModels1:PasswordHelper.Attach="True" 
-                             viewModels1:PasswordHelper.Password="{Binding UserPassword, Mode=TwoWay}"  PasswordChanged="PasswordBox_OnPasswordChanged"
+                             viewModels1:PasswordHelper.Password="{Binding UserViewModel.UserPassword, Mode=TwoWay}"  PasswordChanged="PasswordBox_OnPasswordChanged"
                              />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,10">
                     <Button Width="100" Content="Вход" Command="{Binding LogInCommand}"/>
