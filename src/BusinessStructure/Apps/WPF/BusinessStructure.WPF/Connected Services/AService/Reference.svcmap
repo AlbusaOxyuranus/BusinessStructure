@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:58413/AuthentificationManagement.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://services.xcs.by/AuthentificationManagement.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="AuthentificationManagement.wsdl" MetadataType="Wsdl" ID="642f7ab9-29c9-40fe-a0b5-b183e7c9dcfe" SourceId="1" SourceUrl="http://localhost:58413/AuthentificationManagement.svc?wsdl" />
-    <MetadataFile FileName="AuthentificationManagement.disco" MetadataType="Disco" ID="792e10d8-a65f-42eb-9ae8-3852d9b7a53c" SourceId="1" SourceUrl="http://localhost:58413/AuthentificationManagement.svc?disco" />
-    <MetadataFile FileName="AuthentificationManagement.xsd" MetadataType="Schema" ID="92766daa-8fda-4375-b33c-b219748c57cc" SourceId="1" SourceUrl="http://localhost:58413/AuthentificationManagement.svc?xsd=xsd1" />
-    <MetadataFile FileName="AuthentificationManagement1.xsd" MetadataType="Schema" ID="28c96315-6f7d-4f40-be72-d0b48a92b40c" SourceId="1" SourceUrl="http://localhost:58413/AuthentificationManagement.svc?xsd=xsd0" />
-    <MetadataFile FileName="AuthentificationManagement2.xsd" MetadataType="Schema" ID="d8cdbab3-1f17-44a3-86f4-2a6ed0ed8594" SourceId="1" SourceUrl="http://localhost:58413/AuthentificationManagement.svc?xsd=xsd2" />
+    <MetadataFile FileName="AuthentificationManagement3.xsd" MetadataType="Schema" ID="add839bd-6244-46a5-addd-ebaf596d012a" SourceId="1" SourceUrl="http://services.xcs.by/AuthentificationManagement.svc?xsd=xsd1" />
+    <MetadataFile FileName="AuthentificationManagement1.disco" MetadataType="Disco" ID="0c35152f-08b2-4b00-8365-f3d962026169" SourceId="1" SourceUrl="http://services.xcs.by/AuthentificationManagement.svc?disco" />
+    <MetadataFile FileName="AuthentificationManagement31.xsd" MetadataType="Schema" ID="90381a56-7ea9-486c-b2cb-3b14e558516d" SourceId="1" SourceUrl="http://services.xcs.by/AuthentificationManagement.svc?xsd=xsd2" />
+    <MetadataFile FileName="AuthentificationManagement1.wsdl" MetadataType="Wsdl" ID="0a1d6ecf-efe8-4da4-b75c-45903b806cb3" SourceId="1" SourceUrl="http://services.xcs.by/AuthentificationManagement.svc?wsdl" />
+    <MetadataFile FileName="AuthentificationManagement32.xsd" MetadataType="Schema" ID="7bee54d0-958f-43fd-9721-0c8d4153adde" SourceId="1" SourceUrl="http://services.xcs.by/AuthentificationManagement.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

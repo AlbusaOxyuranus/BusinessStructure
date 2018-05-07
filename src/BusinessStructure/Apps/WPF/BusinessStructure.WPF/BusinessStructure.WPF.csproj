@@ -227,15 +227,15 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="BusinessStructure.WPF_TemporaryKey.pfx" />
-    <None Include="Connected Services\AService\AuthentificationManagement.wsdl" />
-    <None Include="Connected Services\AService\AuthentificationManagement.xsd">
+    <None Include="Connected Services\AService\AuthentificationManagement1.wsdl" />
+    <None Include="Connected Services\AService\AuthentificationManagement3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\AService\AuthentificationManagement1.wsdl" />
     <None Include="Connected Services\AService\AuthentificationManagement1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\AService\AuthentificationManagement2.xsd">
+    <None Include="Connected Services\AService\AuthentificationManagement32.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\AService\AuthentificationManagement3.xsd">
@@ -303,12 +303,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\AService\AuthentificationManagement1.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\AService\AuthentificationManagement.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
