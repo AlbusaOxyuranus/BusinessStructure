@@ -14,27 +14,28 @@ namespace BS.AuthenticationService
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
+            if (composite == null) throw new ArgumentNullException(nameof(composite));
+            if (composite.BoolValue) composite.StringValue += "Suffix";
             return composite;
         }
 
-        public RequestResult<UserResult,UserError> Login(string email, string password)
+        public RequestResult<UserResult, UserError> Login(string email, string password)
         {
-            if(email!= "nadski@yandex.by" || password!="1")
+            if (email != "nadski@yandex.by" || password != "1")
+                return new RequestResult<UserResult, UserError>(null,
+                    new UserErrorList().Single(x => x.UserErrorEnum == UserErrorEnum.NotFound));
+            return new RequestResult<UserResult, UserError>(new UserResult
             {
-                return new RequestResult<UserResult,UserError>(null,new UserErrorList().Single(x=>x.UserErrorEnum==UserErrorEnum.NotFound));
-            }
-            return new RequestResult<UserResult, UserError>(new UserResult(){FullUserName = "Сугак Надежда Анатольевна"});
+                FullUserName = "Сугак Надежда Анатольевна"
+            });
         }
 
-        public void ResetPassword(string email)
+        public RequestResult<UserInfoResult, UserInfoError> GetUserInfo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public object ResetPassword(string email)
         {
             throw new NotImplementedException();
         }

@@ -18,7 +18,10 @@ namespace BS.AuthenticationService
         RequestResult<UserResult,UserError> Login(string email, string password);
 
         [OperationContract]
-        void ResetPassword(string email);
+        RequestResult<UserInfoResult, UserInfoError> GetUserInfo();
+
+        [OperationContract]
+        object ResetPassword(string email);
     }
 
 
