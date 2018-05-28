@@ -32,7 +32,7 @@
   <xs:element name="Login">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -41,6 +41,18 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BS.AuthenticationService" minOccurs="0" name="LoginResult" nillable="true" type="q3:RequestResultOfUserResultUserErrorjphcqKqy" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserInfo">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BS.AuthenticationService" minOccurs="0" name="GetUserInfoResult" nillable="true" type="q4:RequestResultOfUserInfoResultArrayOfUserInfoErrorEnumjphcqKqy" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -53,7 +65,9 @@
   </xs:element>
   <xs:element name="ResetPasswordResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ResetPasswordResult" nillable="true" type="xs:anyType" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>
