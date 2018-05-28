@@ -42,4 +42,35 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="UserErrorEnum" nillable="true" type="tns:UserErrorEnum" />
+  <xs:complexType name="RequestResultOfUserInfoResultArrayOfUserInfoErrorEnumjphcqKqy">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="RequestResultOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/BS.AuthenticationService" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="UserInfoResult" Namespace="http://schemas.datacontract.org/2004/07/BS.AuthenticationService" />
+          <GenericParameter Name="ArrayOfUserInfoErrorEnum" Namespace="http://schemas.datacontract.org/2004/07/BS.AuthenticationService" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Data" nillable="true" type="tns:UserInfoResult" />
+      <xs:element minOccurs="0" name="Error" nillable="true" type="tns:ArrayOfUserInfoErrorEnum" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RequestResultOfUserInfoResultArrayOfUserInfoErrorEnumjphcqKqy" nillable="true" type="tns:RequestResultOfUserInfoResultArrayOfUserInfoErrorEnumjphcqKqy" />
+  <xs:complexType name="UserInfoResult">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="UserInfoResult" nillable="true" type="tns:UserInfoResult" />
+  <xs:complexType name="ArrayOfUserInfoErrorEnum">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserInfoErrorEnum" type="tns:UserInfoErrorEnum" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserInfoErrorEnum" nillable="true" type="tns:ArrayOfUserInfoErrorEnum" />
+  <xs:simpleType name="UserInfoErrorEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Locked" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="UserInfoErrorEnum" nillable="true" type="tns:UserInfoErrorEnum" />
 </xs:schema>

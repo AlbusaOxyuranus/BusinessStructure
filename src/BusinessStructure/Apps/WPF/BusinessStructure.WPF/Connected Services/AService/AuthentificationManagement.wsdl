@@ -25,6 +25,12 @@
   <wsdl:message name="IAuthentificationManagement_Login_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoginResponse" />
   </wsdl:message>
+  <wsdl:message name="IAuthentificationManagement_GetUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="IAuthentificationManagement_GetUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoResponse" />
+  </wsdl:message>
   <wsdl:message name="IAuthentificationManagement_ResetPassword_InputMessage">
     <wsdl:part name="parameters" element="tns:ResetPassword" />
   </wsdl:message>
@@ -44,12 +50,16 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IAuthentificationManagement/Login" message="tns:IAuthentificationManagement_Login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAuthentificationManagement/LoginResponse" message="tns:IAuthentificationManagement_Login_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthentificationManagement/GetUserInfo" message="tns:IAuthentificationManagement_GetUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthentificationManagement/GetUserInfoResponse" message="tns:IAuthentificationManagement_GetUserInfo_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ResetPassword">
       <wsdl:input wsaw:Action="http://tempuri.org/IAuthentificationManagement/ResetPassword" message="tns:IAuthentificationManagement_ResetPassword_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAuthentificationManagement/ResetPasswordResponse" message="tns:IAuthentificationManagement_ResetPassword_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="BasicHttpBinding_IAuthentificationManagement" type="tns:IAuthentificationManagement">
+  <wsdl:binding name="AuthentificationManagement" type="tns:IAuthentificationManagement">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetData">
       <soap:operation soapAction="http://tempuri.org/IAuthentificationManagement/GetData" style="document" />
@@ -78,6 +88,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap:operation soapAction="http://tempuri.org/IAuthentificationManagement/GetUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ResetPassword">
       <soap:operation soapAction="http://tempuri.org/IAuthentificationManagement/ResetPassword" style="document" />
       <wsdl:input>
@@ -89,7 +108,7 @@
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="AuthentificationManagement">
-    <wsdl:port name="BasicHttpBinding_IAuthentificationManagement" binding="tns:BasicHttpBinding_IAuthentificationManagement">
+    <wsdl:port name="AuthentificationManagement" binding="tns:AuthentificationManagement">
       <soap:address location="http://localhost:58413/AuthentificationManagement.svc" />
     </wsdl:port>
   </wsdl:service>
