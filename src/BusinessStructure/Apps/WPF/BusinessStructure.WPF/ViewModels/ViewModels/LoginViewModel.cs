@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using BlackBee.Toolkit.Base;
@@ -39,7 +40,7 @@ namespace BusinessStructure.Vms.ViewModels
                                                 && !string.IsNullOrEmpty(UserViewModel.UserPassword) &&
                                                 !string.IsNullOrWhiteSpace(UserViewModel.UserPassword))
             {
-                var vClient = new AuthentificationManagementClient();
+                var vClient = new AuthentificationManagementClient(new BasicHttpBinding(BasicHttpSecurityMode.None),new EndpointAddress(new Uri("http://services.xcs.by/AuthentificationManagement.svc")));
                 var result = await vClient.LoginAsync(UserViewModel.UserName, UserViewModel.UserPassword);
                 if (result.Error != null)
                 {
