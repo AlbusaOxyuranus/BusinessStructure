@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BS.AuthenticationService
@@ -19,15 +20,26 @@ namespace BS.AuthenticationService
             return composite;
         }
 
-        public RequestResult<UserResult, UserError> Login(string email, string password)
+        public RequestResult<UserResult, UserError> Login(string login, string password)
         {
-            if (email != "nadski@yandex.by" || password != "1")
-                return new RequestResult<UserResult, UserError>(null,
-                    new UserErrorList().Single(x => x.UserErrorEnum == UserErrorEnum.NotFound));
+            var dataDb = new DataDb();
+            
+            if(dataDb.Any(x=>x.Login == login && x.Password==password))
+                return new RequestResult<UserResult, UserError>(null,new UserErrorList().Single(x => x.UserErrorEnum == UserErrorEnum.NotFound));
+
+            var result = dataDb.Single(x => x.Login == login && x.Password == password);
             return new RequestResult<UserResult, UserError>(new UserResult
             {
-                FullUserName = "Сугак Надежда Анатольевна"
+                FullUserName = result.FullUserName
             });
+            
+            //if (login != "nadski@yandex.by" || password != "1")
+            //    return new RequestResult<UserResult, UserError>(null,
+            //        new UserErrorList().Single(x => x.UserErrorEnum == UserErrorEnum.NotFound));
+            //return new RequestResult<UserResult, UserError>(new UserResult
+            //{
+            //    FullUserName = "Сугак Надежда Анатольевна"
+            //});
         }
 
         public RequestResult<UserInfoResult, UserInfoError> GetUserInfo()
@@ -38,6 +50,38 @@ namespace BS.AuthenticationService
         public object ResetPassword(string email)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public class User
+    {
+        public string Login { get; set; }
+        public Guid Id { get; set; }
+        public string Password { get; set; }
+        public string FullUserName { get; set; }
+    }
+    //public class UserInfo{
+    //    public Guid Id { get; set; }
+    //    public 
+    //}
+    public class DataDb : List<User>
+    {
+        public DataDb()
+        {
+            Add(new User
+            {
+                Id = Guid.NewGuid(),
+                Login = "monnaanna.by",
+                Password = "12345",
+                FullUserName = "Сугак Надежда Анатольевна"
+            });
+            Add(new User
+            {
+                Id = Guid.NewGuid(),
+                Login = "fastmebel.by",
+                Password = "12345",
+                FullUserName = "Сугак Олег Анатольевна"
+            });
         }
     }
 }

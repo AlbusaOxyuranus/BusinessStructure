@@ -15,7 +15,7 @@ namespace BS.AuthenticationService
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
         [OperationContract]
-        RequestResult<UserResult,UserError> Login(string email, string password);
+        RequestResult<UserResult, UserError> Login(string login, string password);
 
         [OperationContract]
         RequestResult<UserInfoResult, UserInfoError> GetUserInfo();

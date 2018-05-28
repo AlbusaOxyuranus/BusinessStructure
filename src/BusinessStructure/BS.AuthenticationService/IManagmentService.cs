@@ -8,7 +8,5 @@ namespace BS.AuthenticationService
     {
         [OperationContract]
         void DoWork();
-
-        
     }
 }
